@@ -73,13 +73,28 @@ app.get('/owner/check/:code', ownerAuth, (req, res) => {
 });
 
 // ---------- Joueur ----------
+app.set('trust proxy', 1);
+const attempts = {};
+const limited = (ip) => { const now = Date.now(), a = (attempts[ip] || []).filter((t) => now - t < 600000); a.push(now); attempts[ip] = a; return a.length > 40; };
+function codeError(db, code) {
+  const c = db.checks[code];
+  if (!c) return 'Code invalide';
+  if (c.report) return 'Ce code a déjà été utilisé';
+  if (Date.now() - c.createdAt > CODE_TTL) return 'Code expiré';
+  const k = db.keys[c.key];
+  if (!k || k.revoked || Date.now() > k.expiresAt) return 'Abonnement du serveur expiré';
+  return null;
+}
+app.post('/validate-code', (req, res) => {
+  if (limited(req.ip)) return res.json({ ok: false, error: 'Trop de tentatives, réessayez plus tard' });
+  const err = codeError(load(), String((req.body || {}).code || ''));
+  res.json(err ? { ok: false, error: err } : { ok: true });
+});
 app.post('/submit', (req, res) => {
-  const { code, report } = req.body || {}, db = load(), c = db.checks[code];
-  if (!c) return res.json({ ok: false, error: 'Code invalide' });
-  if (c.report) return res.json({ ok: false, error: 'Ce code a déjà été utilisé' });
-  if (Date.now() - c.createdAt > CODE_TTL) return res.json({ ok: false, error: 'Code expiré' });
-  const k = db.keys[c.key]; if (!k || k.revoked || Date.now() > k.expiresAt) return res.json({ ok: false, error: 'Abonnement du serveur expiré' });
-  c.report = report; save(db); res.json({ ok: true });
+  if (limited(req.ip)) return res.json({ ok: false, error: 'Trop de tentatives, réessayez plus tard' });
+  const { code, report } = req.body || {}, db = load(), err = codeError(db, String(code || ''));
+  if (err) return res.json({ ok: false, error: err });
+  db.checks[code].report = report; save(db); res.json({ ok: true });
 });
 
 app.get('/download', (_, r) => r.sendFile(path.join(__dirname, 'download.html')));

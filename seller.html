@@ -1,0 +1,13 @@
+<!DOCTYPE html><meta charset=utf-8><title>Vendeur — clés PC Check</title>
+<body style="font-family:sans-serif;background:#040b1c;color:#eaf2ff;padding:20px;max-width:900px;margin:auto">
+<h2>Gestion des clés (vendeur)</h2>
+<input id=t type=password placeholder="Admin token" style="padding:8px;width:240px">
+<p>Durée (jours) <input id=d value=30 size=4> Nombre <input id=c value=1 size=3> Nom du client <input id=l size=16>
+<button onclick=mk()>Générer</button> <button onclick=ls()>Liste</button></p>
+<pre id=o style="background:#071530;padding:12px;border-radius:8px;white-space:pre-wrap"></pre>
+<script>
+const H=()=>({'Content-Type':'application/json','x-admin-token':t.value});
+async function mk(){const r=await fetch('/seller/create',{method:'POST',headers:H(),body:JSON.stringify({days:d.value,count:c.value,label:l.value})});const j=await r.json();o.textContent=j.keys?j.keys.join('\n'):JSON.stringify(j)}
+async function ls(){const r=await fetch('/seller/list',{headers:H()});const j=await r.json();
+ o.textContent=Array.isArray(j)?j.map(k=>k.key+' | '+k.days+'j | '+(k.label||'-')+' | '+(k.revoked?'DÉSACTIVÉE':k.expiresAt?'expire '+new Date(k.expiresAt).toLocaleDateString():'jamais utilisée')+' | '+k.checks+' checks').join('\n'):JSON.stringify(j)}
+</script>

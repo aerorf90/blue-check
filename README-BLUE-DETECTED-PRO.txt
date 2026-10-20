@@ -1,15 +1,13 @@
-BLUE DETECTED — SITE + API
+BLUE DETECTED — WEBSITE + API (REFRESHED UI)
 
-Ce dossier contient le site web, le serveur Node.js, le tableau de bord des propriétaires de serveurs, les pages légales et le système de clés.
+This archive contains the public website, Node.js server, staff dashboard, seller key management, download page, and legal pages.
 
-Installation :
-1. Installer Node.js 18 ou supérieur.
-2. Dans ce dossier, exécuter : npm install
-3. Définir ADMIN_TOKEN avec une longue valeur secrète.
-4. Configurer DISCORD_CLIENT_ID, DISCORD_CLIENT_SECRET et BASE_URL pour OAuth Discord.
-5. Configurer DOWNLOAD_URL vers le ZIP du scanner Blue Detected.
-6. Démarrer avec : npm start
+Requirements: Node.js 18+ and MongoDB (if configured/required by your deployment).
+Install: npm install
+Run: npm start
 
-Variables utiles : ADMIN_TOKEN (obligatoire), SESSION_SECRET, DISCORD_CLIENT_ID, DISCORD_CLIENT_SECRET, BASE_URL, DOWNLOAD_URL, DISCORD_INVITE, CONTACT_EMAIL, RETENTION_DAYS, PORT, MONGODB_URI.
+Configure environment variables before use: ADMIN_TOKEN (strong secret), SESSION_SECRET, DISCORD_CLIENT_ID, DISCORD_CLIENT_SECRET, BASE_URL, DOWNLOAD_URL, DISCORD_INVITE, CONTACT_EMAIL, RETENTION_DAYS, PORT, MONGODB_URI.
 
-Sécurité : servir uniquement en HTTPS en production; ne jamais publier ADMIN_TOKEN ou les secrets Discord. Les résultats d'analyse sont des indicateurs à examiner par le staff, pas une preuve automatique.
+IMPORTANT: This ZIP updates the site files, not your already-published hosting automatically. Deploy these files to the same hosting/server and restart the Node.js service to see the new design online. Test locally first. Never commit ADMIN_TOKEN or Discord secrets. Serve production traffic over HTTPS.
+
+Security: reports are indicators for staff review, not automatic proof of cheating. Obtain player consent before checks. The frontend relies on the existing server.js API routes; those routes have not been rewritten in this UI refresh.

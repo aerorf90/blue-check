@@ -1,12 +1,12 @@
-<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dashboard — Blue Detected</title>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Staff Dashboard — Blue Detected</title>
 <link rel="icon" href="/logo.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="/style.css">
 <style>
 #who{display:flex;align-items:center;gap:10px;font-size:14px}#who img{width:30px;height:30px;border-radius:50%}
-.center{max-width:460px;margin:72px auto 0;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:32px}
+.center{max-width:520px;margin:72px auto 0;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:32px}
 .center h1{font-size:26px;margin-bottom:8px}.center .btn.dc{width:100%;margin:22px 0 12px}.center p{font-size:14px}
-.top{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin:36px 0 22px}.top h1{font-size:28px}
-.stats{display:flex}.stats div{padding:0 22px;border-left:1px solid var(--line)}.stats div:first-child{border:0;padding-left:0}.stats b{display:block;font:700 26px "Sora",sans-serif;line-height:1.1}.stats span{font-size:12px;color:var(--mut)}
-.panel{backdrop-filter:blur(8px);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px;margin-bottom:16px}
+.top{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin:36px 0 22px}.top h1{font-size:clamp(28px,4vw,36px)}
+.stats{display:flex}.stats div{padding:0 18px;border-left:1px solid var(--line)}.stats div:first-child{border:0;padding-left:0}.stats b{display:block;font:700 26px "Sora",sans-serif;line-height:1.1}.stats span{font-size:12px;color:var(--mut)}
+.panel{backdrop-filter:blur(14px);background:linear-gradient(145deg,rgba(15,29,54,.92),rgba(8,17,33,.88));border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:18px;box-shadow:0 18px 48px rgba(0,0,0,.12)}
 .newrow{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.newrow input{flex:1;min-width:200px}
 #newbox{margin-top:18px;padding-top:18px;border-top:1px solid var(--line)}.code{font:700 34px "Sora",sans-serif;letter-spacing:6px}
 .bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px}.bar input{margin-left:auto;width:220px;padding:8px 12px}
@@ -15,7 +15,7 @@ table{width:100%;border-collapse:collapse;font-size:14px}th{color:var(--mut);fon
 tr.r{cursor:pointer}tr.r:hover td{background:rgba(255,255,255,.07)}td small{display:block;color:var(--mut);font-size:12px}
 .empty{padding:34px 10px;text-align:center;color:var(--mut)}
 .shade{position:fixed;inset:0;background:rgba(2,5,14,.6);z-index:40}
-.drawer{position:fixed;top:0;right:0;bottom:0;width:min(580px,100%);background:#0b2a86;border-left:1px solid var(--line);z-index:50;overflow:auto;padding:24px;animation:in .22s ease-out}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(620px,100%);background:#091426;border-left:1px solid var(--line);z-index:50;overflow:auto;padding:24px;animation:in .22s ease-out}
 @keyframes in{from{transform:translateX(40px);opacity:0}to{transform:none;opacity:1}}
 .dh{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.dh h2{font-size:21px}
 .verdict{display:flex;gap:22px;align-items:center;margin:22px 0;padding:18px;border-radius:10px}.verdict b{display:block;font:700 18px "Sora",sans-serif}.verdict span{font-size:13px;color:#c4d3f2}
@@ -26,33 +26,33 @@ tr.r{cursor:pointer}tr.r:hover td{background:rgba(255,255,255,.07)}td small{disp
 .f details{margin-top:4px}.f summary{cursor:pointer;color:var(--mut);font-size:12px}.f code{display:block;margin-top:4px;font:12px Consolas,monospace;color:#d3e0ff;word-break:break-all}
 .note{font-size:12px;color:var(--mut)}
 #toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#0d3bb0;border:1px solid #8fe3ff;padding:10px 18px;border-radius:10px;font-size:14px;z-index:60}
-@media(max-width:700px){.stats div{padding:0 12px}.bar input{width:100%;margin-left:0}.hcol{display:none}}
+@media(max-width:700px){.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;width:100%}.stats div{padding:12px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.025)}.bar input{width:100%;margin-left:0}.hcol{display:none}}
 </style></head><body class="glow">
 <nav class="nav"><div class="wrap"><a class="logo" href="/"><img src="/logo.png" alt="">Blue Detected</a><span class="sp"></span>
- <div id="who" class="hide"><img id="av" alt=""><span id="nm"></span><button class="btn ghost sm" onclick="logout()">Déconnexion</button></div></div></nav>
+ <div id="who" class="hide"><img id="av" alt=""><span id="nm"></span><button class="btn ghost sm" onclick="logout()">Sign out</button></div></div></nav>
 <main class="wrap">
-<p id="loading" class="mut" style="text-align:center;margin-top:90px">Chargement…</p>
-<div class="center hide" id="login"><h1>Espace staff</h1><p class="mut">Connectez-vous pour créer des vérifications et lire les rapports.</p>
+<p id="loading" class="mut" style="text-align:center;margin-top:90px">Loading your dashboard…</p>
+<div class="center hide" id="login"><h1>Staff dashboard</h1><p class="mut">Sign in to create PC checks and review reports.</p>
  <a class="btn dc" href="/auth/discord"><img src="/discord.svg" alt="">Continue with Discord</a>
- <p class="mut" style="text-align:center">New here? Same button — your Discord ID becomes your login.</p>
- <p class="note" style="text-align:center;margin-top:14px">En continuant, vous acceptez les <a href="/terms">conditions</a> et la <a href="/privacy">politique de confidentialité</a>.</p></div>
+ <p class="mut" style="text-align:center">New here? Sign in with Discord to get started.</p>
+ <p class="note" style="text-align:center;margin-top:14px">By continuing, you agree to the <a href="/terms">terms</a> and the <a href="/privacy">privacy policy</a>.</p></div>
 
-<div class="center hide" id="activate"><h1>Activez votre clé</h1>
- <p class="mut">Connecté en tant que <b id="dn"></b>. La clé sera liée à ce compte Discord et ne pourra plus servir à un autre. Les jours commencent à l'activation.</p>
- <div class="newrow" style="margin-top:18px"><input id="key" placeholder="PCK-XXXX-XXXX-XXXX"><button class="btn" onclick="activate()">Activer la clé</button></div>
+<div class="center hide" id="activate"><h1>Activate your key</h1>
+ <p class="mut">Signed in as <b id="dn"></b>. This key will be linked to this Discord account. Its duration starts on activation.</p>
+ <div class="newrow" style="margin-top:18px"><input id="key" placeholder="PCK-XXXX-XXXX-XXXX"><button class="btn" onclick="activate()">Activate key</button></div>
  <p id="actMsg" style="margin-top:10px;font-size:13px;color:var(--bad)"></p></div>
 
 <div id="app" class="hide">
- <div class="top"><div><h1>Vos vérifications</h1><p class="mut" id="exp" style="font-size:14px"></p></div>
-  <div class="stats"><div><b id="s-all">0</b><span>Checks</span></div><div><b id="s-ok" style="color:var(--ok)">0</b><span>Propres</span></div><div><b id="s-warn" style="color:var(--warn)">0</b><span>À vérifier</span></div><div><b id="s-bad" style="color:var(--bad)">0</b><span>Suspects</span></div></div></div>
- <div class="panel"><div class="newrow"><input id="pl" placeholder="Nom du joueur (facultatif)"><button class="btn" onclick="newCheck()">Créer un check</button></div>
+ <div class="top"><div><h1>Your checks</h1><p class="mut" id="exp" style="font-size:14px"></p></div>
+  <div class="stats"><div><b id="s-all">0</b><span>Checks</span></div><div><b id="s-ok" style="color:var(--ok)">0</b><span>Clear</span></div><div><b id="s-warn" style="color:var(--warn)">0</b><span>Review</span></div><div><b id="s-bad" style="color:var(--bad)">0</b><span>Flagged</span></div></div></div>
+ <div class="panel"><div class="newrow"><input id="pl" placeholder="Player name (optional)"><button class="btn" onclick="newCheck()">Create check</button></div>
   <div id="newbox" class="hide"><div class="code" id="code"></div>
-   <div class="newrow" style="margin-top:12px"><button class="btn" onclick="copyLink()">Copier le lien de téléchargement</button><button class="btn ghost" onclick="copyMsg()">Copier le lien et le code</button></div>
-   <p class="note" style="margin-top:10px">Envoyez-les au joueur : il télécharge l'application, accepte, puis saisit le code (valable 24 h). Lui ne voit aucun résultat.</p></div></div>
+   <div class="newrow" style="margin-top:12px"><button class="btn" onclick="copyLink()">Copy download link</button><button class="btn ghost" onclick="copyMsg()">Copy link + code</button></div>
+   <p class="note" style="margin-top:10px">Send the link and code to the player. They review the notice, consent, and enter the code (valid for 24 hours). The report is staff-only.</p></div></div>
  <div class="panel"><div class="bar" id="chips"></div>
-  <div style="overflow-x:auto"><table><thead><tr><th>Joueur</th><th class="hcol">Date</th><th>Clean</th><th>Résultat</th></tr></thead><tbody id="rows"></tbody></table></div></div>
+  <div style="overflow-x:auto"><table><thead><tr><th>Player</th><th class="hcol">Date</th><th>Score</th><th>Result</th></tr></thead><tbody id="rows"></tbody></table></div></div>
 </div></main>
-<footer class="foot"><div class="wrap"><a href="/privacy">Confidentialité</a><a href="/terms">Conditions</a><span>Les rapports sont supprimés automatiquement après <span id="ret">30</span> jours.</span></div></footer>
+<footer class="foot"><div class="wrap"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><span>Reports are automatically deleted after <span id="ret">30</span> days.</span></div></footer>
 <div id="shade" class="shade hide" onclick="closeD()"></div><aside id="drawer" class="drawer hide"></aside><div id="toast" class="hide"></div>
 <script>
 const $=id=>document.getElementById(id);let ALL=[],flt='all',q='',lastCode='',timer=null,openCode=null;
@@ -62,21 +62,21 @@ const link=()=>location.origin+'/download',tone=n=>n>=85?'ok':n>=60?'warn':'bad'
 function show(id){$('loading').classList.add('hide');['login','activate','app'].forEach(x=>$(x).classList.toggle('hide',x!==id))}
 function toast(m){const t=$('toast');t.textContent=m;t.classList.remove('hide');clearTimeout(t._h);t._h=setTimeout(()=>t.classList.add('hide'),1800)}
 async function copy(t,m){try{await navigator.clipboard.writeText(t)}catch(e){const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();document.execCommand('copy');a.remove()}toast(m)}
-const copyLink=()=>copy(link(),'Lien copié');
-const copyMsg=()=>copy(`Télécharge l'application de vérification ici : ${link()}\nPuis entre ce code : ${lastCode}`,'Lien et code copiés');
+const copyLink=()=>copy(link(),'Link copied');
+const copyMsg=()=>copy(`Télécharge l'application de vérification ici : ${link()}\nPuis entre ce code : ${lastCode}`,'Link and code copied');
 async function boot(){const m=await api('/owner/me');if(m.http===401){show('login');return}
  $('who').classList.remove('hide');$('nm').textContent=m.user.name;
  $('av').src=m.user.avatar?`https://cdn.discordapp.com/avatars/${m.user.id}/${m.user.avatar}.png?size=64`:'https://cdn.discordapp.com/embed/avatars/0.png';
- if(m.status!=='ok'){$('dn').textContent=m.user.name;$('actMsg').textContent=m.status==='expired'?'Votre clé a expiré. Entrez une nouvelle clé.':m.status==='revoked'?'Votre clé a été désactivée.':'';show('activate');return}
+ if(m.status!=='ok'){$('dn').textContent=m.user.name;$('actMsg').textContent=m.status==='expired'?'Your key has expired. Enter a new key.':m.status==='revoked'?'Your key has been revoked.':'';show('activate');return}
  show('app');refresh();clearInterval(timer);timer=setInterval(refresh,5000)}
 async function logout(){await api('/auth/logout',{method:'POST'});location.href='/'}
-async function activate(){$('actMsg').textContent='';const j=await api('/owner/activate',{method:'POST',body:JSON.stringify({key:$('key').value})});j.ok?boot():$('actMsg').textContent=j.error||'Erreur'}
+async function activate(){$('actMsg').textContent='';const j=await api('/owner/activate',{method:'POST',body:JSON.stringify({key:$('key').value})});j.ok?boot():$('actMsg').textContent=j.error||'Error'}
 async function newCheck(){const j=await api('/owner/check/new',{method:'POST',body:JSON.stringify({player:$('pl').value})});if(!j.code)return boot();
  lastCode=j.code;$('code').textContent=j.code;$('newbox').classList.remove('hide');$('pl').value='';refresh()}
 function kind(c){if(!c.done)return c.expired?'off':'wait';return c.stats.high?'bad':c.stats.medium?'warn':'ok'}
-const LAB={bad:'🔴 Suspect',warn:'🟠 À vérifier',ok:'🟢 Propre',wait:'En attente',off:'Expiré'};
-function chips(){const L=[['all','Tous'],['bad','Suspects'],['warn','À vérifier'],['ok','Propres'],['wait','En attente']];
- $('chips').innerHTML=L.map(([k,t])=>`<button class="chip ${flt===k?'on':''}" onclick="flt='${k}';render()">${t}</button>`).join('')+'<input id="q" placeholder="Rechercher un joueur ou un code" oninput="q=this.value.toLowerCase();render(true)" value="'+esc(q)+'">'}
+const LAB={bad:'🔴 Suspect',warn:'🟠 Review',ok:'🟢 Propre',wait:'Pending',off:'Expiré'};
+function chips(){const L=[['all','All'],['bad','Flagged'],['warn','Review'],['ok','Clear'],['wait','Pending']];
+ $('chips').innerHTML=L.map(([k,t])=>`<button class="chip ${flt===k?'on':''}" onclick="flt='${k}';render()">${t}</button>`).join('')+'<input id="q" placeholder="Search player or code" oninput="q=this.value.toLowerCase();render(true)" value="'+esc(q)+'">'}
 function render(keep){const n={all:ALL.length,ok:0,warn:0,bad:0};ALL.forEach(c=>{const k=kind(c);if(n[k]!==undefined)n[k]++});
  $('s-all').textContent=n.all;$('s-ok').textContent=n.ok;$('s-warn').textContent=n.warn;$('s-bad').textContent=n.bad;
  if(!keep)chips();const list=ALL.filter(c=>(flt==='all'||kind(c)===flt)&&(!q||(c.player||'').toLowerCase().includes(q)||c.code.includes(q)));
@@ -89,9 +89,9 @@ function donut(v,size){const r=size*.42,C=2*Math.PI*r,col=`var(--${tone(v)=='ok'
  return `<div class="donut" style="width:${size}px;height:${size}px"><svg width="${size}" height="${size}"><circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="${size*.1}"/><circle class="arc" data-t="${(C*(1-v/100)).toFixed(1)}" cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="${col}" stroke-width="${size*.1}" stroke-linecap="round" stroke-dasharray="${C.toFixed(1)}" stroke-dashoffset="${C.toFixed(1)}"/></svg><div class="v" style="font-size:${size*.25}px">${v} %<small>clean</small></div></div>`}
 function closeD(){$('drawer').classList.add('hide');$('shade').classList.add('hide');openCode=null}
 async function openCheck(code){openCode=code;$('drawer').classList.remove('hide');$('shade').classList.remove('hide');
- $('drawer').innerHTML='<p class="mut">Chargement…</p>';const j=await api('/owner/check/'+code);
+ $('drawer').innerHTML='<p class="mut">Loading your dashboard…</p>';const j=await api('/owner/check/'+code);
  const head=`<div class="dh"><div><h2>${esc(j.player)||'Sans nom'}</h2><p class="mut" style="font-size:13px">Code ${esc(code)}</p></div><div class="newrow"><button class="btn ghost sm" onclick="del('${esc(code)}')">Supprimer</button><button class="btn ghost sm" onclick="closeD()" aria-label="Fermer">✕</button></div></div>`;
- if(!j.report){$('drawer').innerHTML=head+'<p class="mut" style="margin-top:24px">En attente du joueur. Le rapport apparaîtra ici dès que la vérification sera terminée.</p>';return}
+ if(!j.report){$('drawer').innerHTML=head+'<p class="mut" style="margin-top:24px">Pending du joueur. Le rapport apparaîtra ici dès que la vérification sera terminée.</p>';return}
  const r=j.report,st=r.stats||{},ch=Array.isArray(r.cheats)?r.cheats:[],cl=Array.isArray(r.cleaners)?r.cleaners:[],has=typeof st.clean==='number';
  const vk=ch.length||st.high?'bad':st.medium?'warn':'ok',vt=ch.length?'Cheat détecté : '+ch.join(', '):st.high?'Éléments très suspects':st.medium?'Aucun cheat connu, éléments à vérifier':'Aucun cheat connu détecté';
  const vs=cl.length?'Programme de nettoyage détecté : '+cl.join(', '):'Aucun programme de nettoyage détecté';

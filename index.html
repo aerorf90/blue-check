@@ -1,6 +1,6 @@
-<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0a2579">
-<title>Blue Detected — Vérification anti-triche pour serveurs FiveM</title>
-<meta name="description" content="Vérifiez le PC d'un joueur avec son accord et recevez un rapport clair : cheats connus, traces effacées, programmes de nettoyage.">
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0a2579">
+<title>Blue Detected — Anti-cheat PC checks for FiveM servers</title>
+<meta name="description" content="Consent-based PC checks for FiveM communities, with clear reports and evidence context for staff review.">
 <link rel="icon" href="/logo.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="/style.css">
 <style>
 .hero{padding:76px 0 36px}.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:52px;align-items:center}
@@ -28,61 +28,61 @@ section{padding:72px 0 0}h2{font-size:clamp(26px,3.4vw,36px);line-height:1.15;ma
 @media(max-width:860px){.hero .wrap,.trust{grid-template-columns:1fr}.rows,.steps{grid-template-columns:1fr}.cta{padding:30px}.hero{padding-top:44px}}
 </style></head><body class="glow">
 <nav class="nav"><div class="wrap"><a class="logo" href="/"><img src="/logo.png" alt="">Blue Detected</a>
- <div class="links"><a href="#rapport">Le rapport</a><a href="#etapes">Comment ça marche</a><a href="#joueur">Respect du joueur</a><a href="#faq">Questions</a></div><span class="sp"></span>
- <a class="btn sm" id="navcta" href="/auth/discord">Se connecter</a></div></nav>
+ <div class="links"><a href="#rapport">Reports</a><a href="#etapes">How it works</a><a href="#joueur">Player consent</a><a href="#faq">FAQ</a></div><span class="sp"></span>
+ <a class="btn sm" id="navcta" href="/auth/discord">Sign in</a></div></nav>
 
 <header class="hero"><div class="wrap">
- <div><h1>Sachez si un joueur triche. En une vérification.</h1>
-  <p class="lead">Blue Detected analyse le PC d'un joueur, avec son accord, et vous envoie un rapport écrit en langage simple. Vous seul le voyez.</p>
+ <div><h1>Make PC checks clearer for your FiveM staff.</h1>
+  <p class="lead">Blue Detected helps staff review PC-check findings with player consent and a readable report. Findings are indicators—not automatic proof.</p>
   <a class="btn dc" href="/auth/discord"><img src="/discord.svg" alt="">Continue with Discord</a>
-  <p class="note">Nouveau ici ? Même bouton : votre ID Discord devient votre identifiant.</p></div>
- <div class="rep" aria-label="Exemple de rapport">
-  <div class="rep-top"><i></i>Exemple de rapport</div>
+  <p class="note">New here? Sign in with Discord to access your staff dashboard.</p></div>
+ <div class="rep" aria-label="Sample report">
+  <div class="rep-top"><i></i>Sample report</div>
   <div class="rep-main"><div class="donut" style="width:104px;height:104px"><svg width="104" height="104" viewBox="0 0 104 104"><circle cx="52" cy="52" r="44" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="10"/><circle class="arc" id="arc" cx="52" cy="52" r="44" fill="none" stroke="#ff6b6b" stroke-width="10" stroke-linecap="round" stroke-dasharray="276.46" stroke-dashoffset="276.46"/></svg><div class="v" style="font-size:26px">34 %<small>clean</small></div></div>
-   <div><b>Cheat détecté : Keyser</b><span>Un programme de nettoyage a aussi été trouvé.</span></div></div>
-  <ul><li class="bad">Ce PC a contacté le site du cheat « Keyser » récemment.<small>Cache DNS — api.keyser-lts.com</small></li>
-   <li class="bad">Le programme du cheat « Keyser » a déjà été lancé sur ce PC.<small>Historique Windows — dernière fois : 12/10/2026 21:40</small></li>
-   <li class="warn">Un programme de nettoyage (« CCleaner ») est installé sur ce PC.<small>Il peut servir à effacer des traces</small></li></ul></div>
+   <div><b>Potential indicator: Keyser</b><span>A cleanup utility was also reported.</span></div></div>
+  <ul><li class="bad">A recent network indicator matched a configured rule.<small>Example indicator · requires review</small></li>
+   <li class="bad">A program-execution indicator matched a configured rule.<small>Example Windows artifact · illustrative data</small></li>
+   <li class="warn">A cleanup utility was detected.<small>Context alone does not prove wrongdoing</small></li></ul></div>
 </div>
-<div class="wrap"><div class="src"><span class="t">Cinq sources croisées dans chaque rapport :</span><i>Fichiers</i><i>Sites contactés</i><i>Historique Windows</i><i>Journaux système</i><i>Dossiers FiveM et GTA V</i></div></div></header>
+<div class="wrap"><div class="src"><span class="t">Potential sources for review:</span><i>Files</i><i>Network artifacts</i><i>Windows artifacts</i><i>System logs</i><i>FiveM / GTA V folders</i></div></div></header>
 
 <main class="wrap">
-<section id="rapport"><h2>Un rapport que tout le staff comprend</h2>
+<section id="rapport"><h2>Reports your whole staff can understand</h2>
  <div class="rows">
-  <div class="row"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><div><b>Cheats connus</b><span>Comparaison avec les empreintes, sites et noms de cheats FiveM : Keyser, RedEngine, Susano, Unicore et d'autres.</span></div></div>
-  <div class="row"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h8"/></svg><div><b>Traces effacées</b><span>Journaux Windows vidés ou coupés, historique des programmes supprimé, logs FiveM manquants.</span></div></div>
-  <div class="row"><svg viewBox="0 0 24 24"><path d="M3 6h18M19 6l-1 14H6L5 6M10 11v6M14 11v6M9 6V4h6v2"/></svg><div><b>Programmes de nettoyage</b><span>CCleaner, BleachBit et équivalents, qu'ils soient installés ou déjà lancés.</span></div></div>
-  <div class="row"><svg viewBox="0 0 24 24"><path d="M12 15l4-5"/><path d="M4.9 19A10 10 0 1119.1 19"/></svg><div><b>Indice clean</b><span>Une note sur 100 pour décider vite. C'est un indicateur, jamais une preuve.</span></div></div>
-  <div class="row"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><div><b>Fichiers FiveM et GTA V</b><span>Mods, plugins et fichiers .asi ajoutés dans les dossiers du jeu.</span></div></div>
-  <div class="row"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg><div><b>Des phrases claires</b><span>Chaque trouvaille est expliquée simplement, avec le détail technique juste en dessous.</span></div></div>
+  <div class="row"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><div><b>Known indicators</b><span>Compare configured names and file fingerprints with known FiveM cheat indicators.</span></div></div>
+  <div class="row"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h8"/></svg><div><b>Missing or cleared artifacts</b><span>Flag potentially missing logs or artifacts when the available data supports it.</span></div></div>
+  <div class="row"><svg viewBox="0 0 24 24"><path d="M3 6h18M19 6l-1 14H6L5 6M10 11v6M14 11v6M9 6V4h6v2"/></svg><div><b>Cleanup utilities</b><span>Report cleanup utilities as context only; they are not proof of cheating.</span></div></div>
+  <div class="row"><svg viewBox="0 0 24 24"><path d="M12 15l4-5"/><path d="M4.9 19A10 10 0 1119.1 19"/></svg><div><b>Review score</b><span>A quick triage indicator—not a verdict or proof.</span></div></div>
+  <div class="row"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><div><b>Files FiveM et GTA V</b><span>Review additional files in game folders with their paths and context.</span></div></div>
+  <div class="row"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg><div><b>Clear explanations</b><span>Each finding includes a plain-language summary and technical details.</span></div></div>
  </div></section>
 
-<section id="etapes"><h2>Trois étapes, aucune installation côté staff</h2>
+<section id="etapes"><h2>Three simple steps</h2>
  <div class="steps">
-  <div class="step"><div class="n">1</div><b>Activez votre clé</b><span>Connectez-vous avec Discord. Votre clé est liée à votre compte pour la durée achetée, 30 jours par exemple.</span></div>
-  <div class="step"><div class="n">2</div><b>Envoyez le lien au joueur</b><span>Créez un check, copiez le lien et le code, envoyez-les. Le joueur accepte, puis la vérification se lance.</span></div>
-  <div class="step"><div class="n">3</div><b>Lisez le résultat</b><span>Le rapport apparaît dans votre dashboard quelques instants après. Le joueur ne voit aucun détail.</span></div>
+  <div class="step"><div class="n">1</div><b>Activate your key</b><span>Sign in with Discord and activate the subscription key you purchased.</span></div>
+  <div class="step"><div class="n">2</div><b>Send the player a link</b><span>Create a check and share its link and code. The player reviews the notice and consents before scanning.</span></div>
+  <div class="step"><div class="n">3</div><b>Review the report</b><span>Reports apparaît dans votre dashboard quelques instants après. Le joueur ne voit aucun détail.</span></div>
  </div></section>
 
-<section id="joueur"><div class="trust"><div><h2>Le joueur reste informé et d'accord</h2><p class="mut" style="margin-top:12px;max-width:380px">Un outil de vérification n'a de valeur que s'il est accepté. Voici ce qui protège vos joueurs, et vous.</p></div>
- <ul><li>Il lit ce qui est analysé et accepte avant que l'analyse démarre.</li>
- <li>Ni documents, ni mots de passe, ni historique de navigation, ni captures d'écran.</li>
- <li>Seul le staff qui a créé le check voit le rapport.</li>
- <li>Les rapports sont supprimés automatiquement après 30 jours.</li></ul></div>
- <p style="margin-top:18px"><a href="/privacy">Lire la politique de confidentialité</a></p></section>
+<section id="joueur"><div class="trust"><div><h2>Player consent comes first</h2><p class="mut" style="margin-top:12px;max-width:380px">A PC check should be transparent. The player must understand the process and agree before it begins.</p></div>
+ <ul><li>The player sees what is checked and consents before scanning.</li>
+ <li>Do not collect documents, passwords, browser history, or screenshots.</li>
+ <li>Only the staff account authorized for the check should access its report.</li>
+ <li>Reports are configured for automatic deletion after 30 days.</li></ul></div>
+ <p style="margin-top:18px"><a href="/privacy">Read the privacy policy</a></p></section>
 
-<section id="faq"><h2>Questions fréquentes</h2><div class="faq">
- <details><summary>Le joueur voit-il le résultat ?</summary><p>Non. Il voit seulement que la vérification est terminée. Le rapport n'apparaît que dans votre dashboard.</p></details>
- <details><summary>Que se passe-t-il si le joueur refuse ?</summary><p>Rien ne démarre sans son accord. Vous décidez des suites selon le règlement de votre serveur.</p></details>
- <details><summary>L'indice clean prouve-t-il quelque chose ?</summary><p>Non. C'est un indicateur pour trier vite. Vérifiez toujours les éléments avant de sanctionner.</p></details>
- <details><summary>L'outil détecte-t-il tous les cheats ?</summary><p>Aucun outil ne le peut. Il reconnaît des cheats connus et les signes de dissimulation, et la liste est mise à jour régulièrement.</p></details>
- <details><summary>Combien de temps dure une clé ?</summary><p>La durée achetée, 30 jours par exemple, à partir de son activation avec votre compte Discord.</p></details>
- <details><summary>Quelles données sont conservées ?</summary><p>Le rapport, supprimé automatiquement après 30 jours. Le détail est dans la politique de confidentialité.</p></details>
+<section id="faq"><h2>FAQ fréquentes</h2><div class="faq">
+ <details><summary>Can the player see the report?</summary><p>Non. Il voit seulement que la vérification est terminée. Reports n'apparaît que dans votre dashboard.</p></details>
+ <details><summary>What if the player declines?</summary><p>The scan should not start without consent. Follow your community rules for next steps.</p></details>
+ <details><summary>Does the score prove cheating?</summary><p>No. It is a triage indicator. Review the underlying evidence before taking action.</p></details>
+ <details><summary>Can any tool detect every cheat?</summary><p>No tool can guarantee detection of every cheat, especially renamed or memory-only tools. Coverage depends on signatures and testing.</p></details>
+ <details><summary>How long does a key last?</summary><p>For the purchased duration, starting when the key is activated.</p></details>
+ <details><summary>What data is retained?</summary><p>Reports, supprimé automatiquement après 30 jours. Le détail est dans la politique de confidentialité.</p></details>
 </div></section>
 
-<div class="cta"><h2>Vérifiez votre premier joueur aujourd'hui</h2><div class="acts"><a class="btn dc" href="/auth/discord"><img src="/discord.svg" alt="">Continue with Discord</a><a class="btn ghost getkey" id="getkey" href="{{INVITE}}" target="_blank" rel="noopener">Obtenir une clé sur Discord</a></div></div>
+<div class="cta"><h2>Start your first PC check</h2><div class="acts"><a class="btn dc" href="/auth/discord"><img src="/discord.svg" alt="">Continue with Discord</a><a class="btn ghost getkey" id="getkey" href="{{INVITE}}" target="_blank" rel="noopener">Get a key on Discord</a></div></div>
 </main>
-<footer class="foot"><div class="wrap"><span>Blue Detected</span><a href="/privacy">Confidentialité</a><a href="/terms">Conditions</a><a href="/download">Télécharger l'application joueur</a></div></footer>
+<footer class="foot"><div class="wrap"><span>Blue Detected</span><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/download">Player download</a></div></footer>
 <script>
 requestAnimationFrame(()=>setTimeout(()=>{document.getElementById('arc').style.strokeDashoffset=(276.46*(1-.34)).toFixed(1)},250));
 const gk=document.getElementById('getkey');if(!gk.getAttribute('href')||gk.getAttribute('href').indexOf('{{')===0)gk.classList.add('hide');

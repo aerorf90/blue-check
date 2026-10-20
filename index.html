@@ -1,90 +1,10 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0a2579">
-<title>Blue Detected — Anti-cheat PC checks for FiveM servers</title>
-<meta name="description" content="Consent-based PC checks for FiveM communities, with clear reports and evidence context for staff review.">
-<link rel="icon" href="/logo.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="/style.css">
-<style>
-.hero{padding:76px 0 36px}.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:52px;align-items:center}
-h1{font-size:clamp(34px,5vw,56px);line-height:1.08;font-weight:700}
-.lead{font-size:18px;color:#d3e0ff;margin:20px 0 28px;max-width:520px}.note{color:var(--mut);font-size:13px;margin-top:14px}
-.rep{background:rgba(5,20,80,.78);border:1px solid var(--line);border-radius:8px;box-shadow:0 34px 80px rgba(2,10,50,.55)}
-.rep-top{display:flex;align-items:center;gap:8px;padding:12px 18px;border-bottom:1px solid var(--line);font-size:13px;color:var(--mut)}.rep-top i{width:8px;height:8px;border-radius:50%;background:var(--bad)}
-.rep-main{display:flex;align-items:center;gap:22px;padding:22px 18px}.rep-main b{font:700 19px "Sora",sans-serif;display:block;margin-bottom:4px;color:#ff9a9a}.rep-main span{color:var(--mut);font-size:13px}
-.rep ul{list-style:none;padding:0 18px 18px}.rep li{border-left:3px solid;padding:9px 12px;margin-top:8px;font-size:13px;border-radius:0 6px 6px 0}.rep li small{display:block;color:var(--mut);font-size:11px;margin-top:2px}
-.rep li.bad{background:rgba(255,107,107,.15);border-color:var(--bad)}.rep li.warn{background:rgba(255,193,90,.14);border-color:var(--warn)}
-.src{margin-top:34px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-size:13px;color:var(--mut)}.src span.t{margin-right:6px}
-.src i{font-style:normal;padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.07);color:#fff}
-section{padding:72px 0 0}h2{font-size:clamp(26px,3.4vw,36px);line-height:1.15;max-width:660px}
-.rows{display:grid;grid-template-columns:1fr 1fr;column-gap:56px;margin-top:30px}
-.row{display:flex;gap:16px;padding:20px 0;border-top:1px solid var(--line)}.row svg{flex:none;width:28px;height:28px;stroke:#8fe3ff;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;margin-top:2px}
-.row b{display:block;font-size:16px;margin-bottom:2px}.row span{color:var(--mut);font-size:14px}
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:36px;margin-top:34px}.step .n{font:700 48px "Sora",sans-serif;color:transparent;-webkit-text-stroke:1.5px #8fe3ff;line-height:1}
-.step b{display:block;font-size:17px;margin:12px 0 4px}.step span{color:var(--mut);font-size:14px}
-.trust{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:start}.trust ul{list-style:none;padding:0}.trust li{padding:14px 0 14px 34px;border-top:1px solid var(--line);position:relative;color:#dbe6ff}
-.trust li::before{content:"";position:absolute;left:4px;top:19px;width:14px;height:8px;border-left:2px solid var(--ok);border-bottom:2px solid var(--ok);transform:rotate(-45deg)}
-.faq{max-width:760px;margin-top:26px}.faq details{border-top:1px solid var(--line);padding:16px 0}.faq details:last-child{border-bottom:1px solid var(--line)}
-.faq summary{cursor:pointer;font-weight:600;font-size:16px}.faq p{margin-top:8px;color:var(--mut);font-size:15px}
-.cta{margin-top:80px;padding:48px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(135deg,rgba(90,160,255,.35),rgba(34,211,255,.1));display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
-.cta h2{max-width:480px}.cta .acts{display:flex;gap:12px;flex-wrap:wrap}
-@media(max-width:860px){.hero .wrap,.trust{grid-template-columns:1fr}.rows,.steps{grid-template-columns:1fr}.cta{padding:30px}.hero{padding-top:44px}}
-</style></head><body class="glow">
-<nav class="nav"><div class="wrap"><a class="logo" href="/"><img src="/logo.png" alt="">Blue Detected</a>
- <div class="links"><a href="#rapport">Reports</a><a href="#etapes">How it works</a><a href="#joueur">Player consent</a><a href="#faq">FAQ</a></div><span class="sp"></span>
- <a class="btn sm" id="navcta" href="/auth/discord">Sign in</a></div></nav>
-
-<header class="hero"><div class="wrap">
- <div><h1>Make PC checks clearer for your FiveM staff.</h1>
-  <p class="lead">Blue Detected helps staff review PC-check findings with player consent and a readable report. Findings are indicators—not automatic proof.</p>
-  <a class="btn dc" href="/auth/discord"><img src="/discord.svg" alt="">Continue with Discord</a>
-  <p class="note">New here? Sign in with Discord to access your staff dashboard.</p></div>
- <div class="rep" aria-label="Sample report">
-  <div class="rep-top"><i></i>Sample report</div>
-  <div class="rep-main"><div class="donut" style="width:104px;height:104px"><svg width="104" height="104" viewBox="0 0 104 104"><circle cx="52" cy="52" r="44" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="10"/><circle class="arc" id="arc" cx="52" cy="52" r="44" fill="none" stroke="#ff6b6b" stroke-width="10" stroke-linecap="round" stroke-dasharray="276.46" stroke-dashoffset="276.46"/></svg><div class="v" style="font-size:26px">34 %<small>clean</small></div></div>
-   <div><b>Potential indicator: Keyser</b><span>A cleanup utility was also reported.</span></div></div>
-  <ul><li class="bad">A recent network indicator matched a configured rule.<small>Example indicator · requires review</small></li>
-   <li class="bad">A program-execution indicator matched a configured rule.<small>Example Windows artifact · illustrative data</small></li>
-   <li class="warn">A cleanup utility was detected.<small>Context alone does not prove wrongdoing</small></li></ul></div>
-</div>
-<div class="wrap"><div class="src"><span class="t">Potential sources for review:</span><i>Files</i><i>Network artifacts</i><i>Windows artifacts</i><i>System logs</i><i>FiveM / GTA V folders</i></div></div></header>
-
-<main class="wrap">
-<section id="rapport"><h2>Reports your whole staff can understand</h2>
- <div class="rows">
-  <div class="row"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><div><b>Known indicators</b><span>Compare configured names and file fingerprints with known FiveM cheat indicators.</span></div></div>
-  <div class="row"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h8"/></svg><div><b>Missing or cleared artifacts</b><span>Flag potentially missing logs or artifacts when the available data supports it.</span></div></div>
-  <div class="row"><svg viewBox="0 0 24 24"><path d="M3 6h18M19 6l-1 14H6L5 6M10 11v6M14 11v6M9 6V4h6v2"/></svg><div><b>Cleanup utilities</b><span>Report cleanup utilities as context only; they are not proof of cheating.</span></div></div>
-  <div class="row"><svg viewBox="0 0 24 24"><path d="M12 15l4-5"/><path d="M4.9 19A10 10 0 1119.1 19"/></svg><div><b>Review score</b><span>A quick triage indicator—not a verdict or proof.</span></div></div>
-  <div class="row"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg><div><b>Files FiveM et GTA V</b><span>Review additional files in game folders with their paths and context.</span></div></div>
-  <div class="row"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg><div><b>Clear explanations</b><span>Each finding includes a plain-language summary and technical details.</span></div></div>
- </div></section>
-
-<section id="etapes"><h2>Three simple steps</h2>
- <div class="steps">
-  <div class="step"><div class="n">1</div><b>Activate your key</b><span>Sign in with Discord and activate the subscription key you purchased.</span></div>
-  <div class="step"><div class="n">2</div><b>Send the player a link</b><span>Create a check and share its link and code. The player reviews the notice and consents before scanning.</span></div>
-  <div class="step"><div class="n">3</div><b>Review the report</b><span>Reports apparaît dans votre dashboard quelques instants après. Le joueur ne voit aucun détail.</span></div>
- </div></section>
-
-<section id="joueur"><div class="trust"><div><h2>Player consent comes first</h2><p class="mut" style="margin-top:12px;max-width:380px">A PC check should be transparent. The player must understand the process and agree before it begins.</p></div>
- <ul><li>The player sees what is checked and consents before scanning.</li>
- <li>Do not collect documents, passwords, browser history, or screenshots.</li>
- <li>Only the staff account authorized for the check should access its report.</li>
- <li>Reports are configured for automatic deletion after 30 days.</li></ul></div>
- <p style="margin-top:18px"><a href="/privacy">Read the privacy policy</a></p></section>
-
-<section id="faq"><h2>FAQ fréquentes</h2><div class="faq">
- <details><summary>Can the player see the report?</summary><p>Non. Il voit seulement que la vérification est terminée. Reports n'apparaît que dans votre dashboard.</p></details>
- <details><summary>What if the player declines?</summary><p>The scan should not start without consent. Follow your community rules for next steps.</p></details>
- <details><summary>Does the score prove cheating?</summary><p>No. It is a triage indicator. Review the underlying evidence before taking action.</p></details>
- <details><summary>Can any tool detect every cheat?</summary><p>No tool can guarantee detection of every cheat, especially renamed or memory-only tools. Coverage depends on signatures and testing.</p></details>
- <details><summary>How long does a key last?</summary><p>For the purchased duration, starting when the key is activated.</p></details>
- <details><summary>What data is retained?</summary><p>Reports, supprimé automatiquement après 30 jours. Le détail est dans la politique de confidentialité.</p></details>
-</div></section>
-
-<div class="cta"><h2>Start your first PC check</h2><div class="acts"><a class="btn dc" href="/auth/discord"><img src="/discord.svg" alt="">Continue with Discord</a><a class="btn ghost getkey" id="getkey" href="{{INVITE}}" target="_blank" rel="noopener">Get a key on Discord</a></div></div>
-</main>
-<footer class="foot"><div class="wrap"><span>Blue Detected</span><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/download">Player download</a></div></footer>
-<script>
-requestAnimationFrame(()=>setTimeout(()=>{document.getElementById('arc').style.strokeDashoffset=(276.46*(1-.34)).toFixed(1)},250));
-const gk=document.getElementById('getkey');if(!gk.getAttribute('href')||gk.getAttribute('href').indexOf('{{')===0)gk.classList.add('hide');
-fetch('/owner/me').then(r=>{if(r.ok){const a=document.getElementById('navcta');a.textContent='Ouvrir le dashboard';a.href='/dashboard'}}).catch(()=>{});
-</script></body></html>
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#071326"><title>Blue Detected — Protection FiveM</title><meta name="description" content="Blue Detected : vérifications PC et rapports anti-triche pour les communautés FiveM."><link rel="icon" href="/logo.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="/style.css"></head><body class="glow landing">
+<nav class="nav"><div class="wrap"><a class="logo" href="/"><img src="/logo.png" alt="">Blue Detected</a><div class="links"><a href="#features">Fonctionnalités</a><a href="#how">Comment ça marche</a><a href="#faq">FAQ</a></div><span class="sp"></span><a class="btn ghost sm" href="/download">Télécharger</a><a class="btn sm" id="navcta" href="/auth/discord">Se connecter</a></div></nav>
+<header class="hero"><div class="wrap hero-grid"><div class="hero-copy"><div class="eyebrow"><span class="pulse"></span> PC CHECK • FIVEM SECURITY</div><h1>Analysez. Détectez.<br><span>Protégez votre serveur.</span></h1><p class="lead">Une vérification PC claire pour votre équipe. Détectez les traces suspectes et consultez les rapports depuis un tableau de bord sécurisé.</p><div class="hero-actions"><a class="btn" href="/download">▣ Télécharger l’outil</a><a class="btn ghost" href="#features">En savoir plus <span>↗</span></a></div><div class="hero-proof"><span>✓ Rapports détaillés</span><span>✓ Accès staff sécurisé</span><span>✓ Windows 10/11</span></div></div>
+<div class="hero-visual"><div class="glow-orb"></div><div class="monitor"><div class="monitor-top"><span class="mini-logo">◈</span><b>BLUE DETECTED <small>PC ANALYZER</small></b><span class="live"><i></i> LIVE SCAN</span></div><div class="monitor-body"><div class="scan-ring"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="48"/><circle class="progress-ring" cx="60" cy="60" r="48"/></svg><div><b>73%</b><small>ANALYSIS</small></div></div><div class="scan-list"><div><span class="scan-icon">▤</span><span>Fichiers analysés<small>Analyse du système</small></span><b class="check">✓</b></div><div><span class="scan-icon">⌘</span><span>Registre Windows<small>Clés et traces</small></span><b class="check">✓</b></div><div><span class="scan-icon">◉</span><span>Processus actifs<small>Signatures connues</small></span><b class="check">✓</b></div><div><span class="scan-icon">⌁</span><span>Logs système<small>Éléments pertinents</small></span><b class="pending">•••</b></div></div></div><div class="monitor-bottom"><span><i></i> Scan engine ready</span><span>BUILD 2.0.0</span></div></div><div class="floating-card floating-top"><span class="float-icon blue">↗</span><div><small>Rapports générés</small><b>1,284 <em>+12.8%</em></b></div></div><div class="floating-card floating-bottom"><span class="float-icon green">✓</span><div><small>Protection active</small><b>System secured</b></div></div><div class="visual-grid"></div></div></div></header>
+<main class="wrap"><section class="feature-strip" id="features"><div class="feature-item"><span class="feature-icon">◈</span><div><b>Détection avancée</b><small>Signatures et indicateurs connus</small></div></div><div class="feature-item"><span class="feature-icon">▤</span><div><b>Rapports détaillés</b><small>Résultats clairs et organisés</small></div></div><div class="feature-item"><span class="feature-icon">▦</span><div><b>Dashboard sécurisé</b><small>Vos vérifications au même endroit</small></div></div><div class="feature-item"><span class="feature-icon">⌘</span><div><b>Windows compatible</b><small>Windows 10 et Windows 11</small></div></div></section>
+<section class="section-block" id="how"><div class="section-head"><div><span class="eyebrow">SIMPLE WORKFLOW</span><h2>Un processus simple.<br><span>Des résultats exploitables.</span></h2></div><p>Créez une vérification, transmettez le code au joueur et consultez le rapport dans votre espace staff.</p></div><div class="steps-grid"><article class="step-card"><div class="step-number">01</div><div class="step-icon">⌁</div><h3>Créez un code</h3><p>Depuis votre tableau de bord, créez une vérification liée à votre compte.</p></article><article class="step-card"><div class="step-number">02</div><div class="step-icon">▣</div><h3>Le joueur lance le scan</h3><p>Le joueur saisit le code dans l’application et accepte la vérification.</p></article><article class="step-card"><div class="step-number">03</div><div class="step-icon">▥</div><h3>Consultez le rapport</h3><p>Les résultats remontent dans votre espace, rattachés au code utilisé.</p></article></div></section>
+<section class="section-block trust-block"><div class="trust-copy"><span class="eyebrow">BUILT FOR COMMUNITIES</span><h2>Tout votre suivi<br><span>dans un seul espace.</span></h2><p>Gardez une vue d’ensemble des vérifications, de leur statut et des résultats reçus. Les indicateurs sont des signaux à examiner, pas une preuve automatique de triche.</p><a class="btn" href="/auth/discord">Accéder au dashboard <span>→</span></a></div><div class="mini-dashboard"><div class="mini-sidebar"><div class="mini-brand">◈ BD</div><span class="selected">▦ Dashboard</span><span>▤ Mes rapports</span><span>⇩ Télécharger</span><span>⚙ Paramètres</span></div><div class="mini-content"><div class="mini-title"><div><small>OVERVIEW</small><b>Bienvenue sur Blue Detected</b></div><span class="avatar">BD</span></div><div class="mini-stats"><div><small>Total des scans</small><b>128</b><em>+8.4%</em></div><div><small>À examiner</small><b>09</b><em class="orange">À vérifier</em></div><div><small>Dernier scan</small><b>2 min</b><em>Mis à jour</em></div></div><div class="chart-card"><div class="chart-title"><b>Activité des vérifications</b><small>7 derniers jours</small></div><svg viewBox="0 0 420 130" preserveAspectRatio="none"><defs><linearGradient id="chartfill" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#278bff" stop-opacity=".35"/><stop offset="1" stop-color="#278bff" stop-opacity="0"/></linearGradient></defs><path d="M0 100 C30 92 35 70 65 82 S110 95 140 65 S180 84 210 60 S250 72 280 45 S330 70 360 28 S400 44 420 18 L420 130 L0 130Z" fill="url(#chartfill)"/><path d="M0 100 C30 92 35 70 65 82 S110 95 140 65 S180 84 210 60 S250 72 280 45 S330 70 360 28 S400 44 420 18" fill="none" stroke="#36a1ff" stroke-width="2.5"/></svg><div class="chart-labels"><span>14 Oct</span><span>15 Oct</span><span>16 Oct</span><span>17 Oct</span><span>18 Oct</span><span>19 Oct</span><span>20 Oct</span></div></div></div></div></section>
+<section class="section-block faq-section" id="faq"><div class="section-head"><div><span class="eyebrow">FAQ</span><h2>Questions fréquentes</h2></div><p>Les informations importantes avant de commencer.</p></div><div class="faq"><details><summary>Comment les résultats sont-ils associés au joueur ?</summary><p>Chaque vérification utilise un code unique. Le rapport envoyé par l’application est associé à ce code et apparaît dans le compte qui l’a créé.</p></details><details><summary>Le score signifie-t-il automatiquement que le joueur triche ?</summary><p>Non. Un score et des détections sont des indicateurs. Le staff doit examiner les détails avant de prendre une décision.</p></details><details><summary>Comment accéder au tableau de bord ?</summary><p>Connectez-vous avec Discord, puis activez une clé valide si votre compte le demande.</p></details></div></section>
+<section class="bottom-cta"><div><span class="eyebrow">READY TO START?</span><h2>Prêt à mieux gérer vos vérifications ?</h2><p>Connectez votre compte et retrouvez vos rapports dans un espace organisé.</p></div><a class="btn" href="/auth/discord">Se connecter avec Discord <span>→</span></a></section></main><footer class="foot"><div class="wrap footer-inner"><a class="logo" href="/"><img src="/logo.png" alt="">Blue Detected</a><span>Un outil d’analyse pour une communauté mieux protégée.</span><div><a href="/download">Télécharger</a><a href="/privacy">Confidentialité</a><a href="/terms">Conditions</a><a href="/seller">Administration</a></div><small>© 2026 Blue Detected. Tous droits réservés.</small></div></footer>
+<script>fetch('/owner/me').then(r=>{if(r.ok){const a=document.getElementById('navcta');a.textContent='Dashboard';a.href='/dashboard'}}).catch(()=>{});</script></body></html>

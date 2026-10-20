@@ -35,3 +35,12 @@ input::placeholder{color:#8fa8e0}
 .prose h1{font-size:32px;margin-bottom:6px}.prose h2{font-size:19px;margin:30px 0 6px;color:#8fe3ff}.prose li{margin:4px 0}.prose ul{padding-left:20px}.prose .m{color:var(--mut);font-size:13px}
 @media(max-width:760px){.nav .links{display:none}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+
+/* Blue Detected professional polish */
+:root{--panel:rgba(10,19,43,.78);--panel2:rgba(17,35,72,.78);--line:rgba(128,166,231,.22);--azure:#4385ff;--cyan:#56d8ff}
+html{background:#07101f}body{background-color:#07101f}.glow{background-color:#07101f;background-image:radial-gradient(900px 520px at 85% -8%,rgba(39,105,230,.28),transparent 65%),radial-gradient(760px 500px at -10% 10%,rgba(34,211,255,.10),transparent 62%),linear-gradient(160deg,#0c1930 0%,#081225 55%,#050b15 100%)}
+.nav{background:rgba(5,13,27,.82);border-bottom-color:rgba(143,174,226,.16)}.logo img{object-fit:contain;filter:drop-shadow(0 0 12px rgba(67,133,255,.28))}
+.btn{background:linear-gradient(135deg,#4b91ff,#2864e8);box-shadow:0 8px 24px rgba(40,100,232,.22)}
+.card,.panel,.stat,.feature,.box{border-color:var(--line)}
+::selection{background:#316fe7;color:white}
+@media(max-width:600px){.wrap{padding-left:16px;padding-right:16px}.nav .wrap{gap:10px;height:60px}.logo{font-size:16px}.logo img{height:30px}}

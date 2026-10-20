@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dashboard — RynWeb PC Check</title>
+<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dashboard — Blue Detected</title>
 <link rel="icon" href="/logo.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="/style.css">
 <style>
 #who{display:flex;align-items:center;gap:10px;font-size:14px}#who img{width:30px;height:30px;border-radius:50%}
@@ -28,7 +28,7 @@ tr.r{cursor:pointer}tr.r:hover td{background:rgba(255,255,255,.07)}td small{disp
 #toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#0d3bb0;border:1px solid #8fe3ff;padding:10px 18px;border-radius:10px;font-size:14px;z-index:60}
 @media(max-width:700px){.stats div{padding:0 12px}.bar input{width:100%;margin-left:0}.hcol{display:none}}
 </style></head><body class="glow">
-<nav class="nav"><div class="wrap"><a class="logo" href="/"><img src="/logo.png" alt="">RynWeb PC Check</a><span class="sp"></span>
+<nav class="nav"><div class="wrap"><a class="logo" href="/"><img src="/logo.png" alt="">Blue Detected</a><span class="sp"></span>
  <div id="who" class="hide"><img id="av" alt=""><span id="nm"></span><button class="btn ghost sm" onclick="logout()">Déconnexion</button></div></div></nav>
 <main class="wrap">
 <p id="loading" class="mut" style="text-align:center;margin-top:90px">Chargement…</p>
@@ -96,12 +96,12 @@ async function openCheck(code){openCode=code;$('drawer').classList.remove('hide'
  const vk=ch.length||st.high?'bad':st.medium?'warn':'ok',vt=ch.length?'Cheat détecté : '+ch.join(', '):st.high?'Éléments très suspects':st.medium?'Aucun cheat connu, éléments à vérifier':'Aucun cheat connu détecté';
  const vs=cl.length?'Programme de nettoyage détecté : '+cl.join(', '):'Aucun programme de nettoyage détecté';
  const meta=`<dl class="meta"><dt>PC</dt><dd>${esc(r.hostname)}</dd><dt>Système</dt><dd>${esc(r.os||'—')}</dd><dt>Analyse</dt><dd>${esc(new Date(r.scannedAt).toLocaleString())}</dd><dt>HWID</dt><dd>${esc(r.hwid)} <button class="btn ghost sm" style="padding:2px 8px" onclick="copy('${esc(r.hwid)}','HWID copié')">Copier</button></dd></dl>`;
- const G={};(r.findings||[]).forEach(f=>(G[f.category]=G[f.category]||[]).push(f));
+ const G={};(r.findings||[]).forEach(f=>(G[f.category]=G[f.category]||[]).push(f));const grouped=r.groups||{};const groupLabels=[['exe','Fichiers EXE'],['dll_sys','DLL / SYS'],['archives','Archives'],['logs','Journaux'],['other','Autres types']];const groupPanel=groupLabels.filter(([k])=>Array.isArray(grouped[k])&&grouped[k].length).map(([k,label])=>`<div class="gh">${label}<span>${grouped[k].length}</span></div>`+grouped[k].map(fx).join('')).join('');
  const order=['Cheat connu','Traces effacées ou masquées','Programme de nettoyage','Fichiers modifiés (FiveM)','Information'];
  const cats=order.filter(c=>G[c]).concat(Object.keys(G).filter(c=>!order.includes(c)));
- const fx=f=>{const s=['high','medium','info'].includes(f.severity)?f.severity:'info';return f.reason?`<div class="f ${s}">${esc(f.reason)}<details><summary>Détail technique</summary><code>${esc(f.detail)}</code></details></div>`:`<div class="f ${s}">${esc(f.category)}<details open><summary>Détail</summary><code>${esc(f.detail)}</code></details></div>`};
+ const fx=f=>{const s=['high','medium','info'].includes(f.severity)?f.severity:'info';const type=String(f.fileType||'OTHER').toUpperCase();return f.reason?`<div class="f ${s}"><span class="pill ${s==='high'?'bad':s==='medium'?'warn':'wait'}">${esc(type)}</span> ${esc(f.reason)}<details><summary>Détail technique</summary><code>${esc(f.detail)}</code></details></div>`:`<div class="f ${s}"><span class="pill wait">${esc(type)}</span> ${esc(f.category)}<details open><summary>Détail</summary><code>${esc(f.detail)}</code></details></div>`};
  $('drawer').innerHTML=head+`<div class="verdict ${vk}">${has?donut(st.clean,96):''}<div><b>${esc(vt)}</b><span>${esc(vs)}</span></div></div>`+(has?'<p class="note">L\'indice clean est indicatif : ce n\'est pas une preuve. La décision finale appartient au staff.</p>':'')+meta+
-  (cats.length?cats.map(c=>`<div class="gh">${esc(c)}<span>${G[c].length}</span></div>`+G[c].map(fx).join('')).join(''):'<p class="mut" style="margin-top:20px">Rien à signaler.</p>');
+  (groupPanel|| (cats.length?cats.map(c=>`<div class="gh">${esc(c)}<span>${G[c].length}</span></div>`+G[c].map(fx).join('')).join(''):'<p class="mut" style="margin-top:20px">Rien à signaler.</p>'));
  setTimeout(()=>document.querySelectorAll('#drawer .arc').forEach(a=>a.style.strokeDashoffset=a.dataset.t),80)}
 async function del(code){if(!confirm('Supprimer définitivement ce rapport ?'))return;await api('/owner/check/delete',{method:'POST',body:JSON.stringify({code})});closeD();refresh()}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeD()});

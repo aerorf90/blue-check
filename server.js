@@ -1,4 +1,4 @@
-// Serveur RynWeb PC Check
+// Serveur Blue Detected
 // Variables : ADMIN_TOKEN (obligatoire), DISCORD_CLIENT_ID, DISCORD_CLIENT_SECRET, SESSION_SECRET,
 //             MONGODB_URI, DOWNLOAD_URL, CONTACT_EMAIL, RETENTION_DAYS, BASE_URL, PORT
 const express = require('express'), crypto = require('crypto'), fs = require('fs'), path = require('path');

@@ -6,31 +6,32 @@
 .center h1{font-size:26px;margin-bottom:8px}.center .btn.dc{width:100%;margin:22px 0 12px}.center p{font-size:14px}
 .top{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;margin:36px 0 22px}.top h1{font-size:28px}
 .stats{display:flex}.stats div{padding:0 22px;border-left:1px solid var(--line)}.stats div:first-child{border:0;padding-left:0}.stats b{display:block;font:700 26px "Sora",sans-serif;line-height:1.1}.stats span{font-size:12px;color:var(--mut)}
-.panel{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px;margin-bottom:16px}
+.panel{backdrop-filter:blur(8px);background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px;margin-bottom:16px}
 .newrow{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.newrow input{flex:1;min-width:200px}
 #newbox{margin-top:18px;padding-top:18px;border-top:1px solid var(--line)}.code{font:700 34px "Sora",sans-serif;letter-spacing:6px}
 .bar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px}.bar input{margin-left:auto;width:220px;padding:8px 12px}
 .chip{background:transparent;border:1px solid var(--line);color:var(--mut);border-radius:999px;padding:6px 14px;font:600 13px "Segoe UI",sans-serif;cursor:pointer}.chip.on{background:var(--azure);border-color:var(--azure);color:#fff}
 table{width:100%;border-collapse:collapse;font-size:14px}th{color:var(--mut);font-weight:600;font-size:12px;text-align:left;padding:8px}td{padding:13px 8px;border-top:1px solid var(--line)}
-tr.r{cursor:pointer}tr.r:hover td{background:#0c173b}td small{display:block;color:var(--mut);font-size:12px}
+tr.r{cursor:pointer}tr.r:hover td{background:rgba(255,255,255,.07)}td small{display:block;color:var(--mut);font-size:12px}
 .empty{padding:34px 10px;text-align:center;color:var(--mut)}
 .shade{position:fixed;inset:0;background:rgba(2,5,14,.6);z-index:40}
-.drawer{position:fixed;top:0;right:0;bottom:0;width:min(580px,100%);background:var(--panel);border-left:1px solid var(--line);z-index:50;overflow:auto;padding:24px;animation:in .22s ease-out}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(580px,100%);background:#0b2a86;border-left:1px solid var(--line);z-index:50;overflow:auto;padding:24px;animation:in .22s ease-out}
 @keyframes in{from{transform:translateX(40px);opacity:0}to{transform:none;opacity:1}}
 .dh{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.dh h2{font-size:21px}
 .verdict{display:flex;gap:22px;align-items:center;margin:22px 0;padding:18px;border-radius:10px}.verdict b{display:block;font:700 18px "Sora",sans-serif}.verdict span{font-size:13px;color:#c4d3f2}
-.verdict.bad{background:#2a1020}.verdict.warn{background:#2a2010}.verdict.ok{background:#0e2c22}
+.verdict.bad{background:rgba(255,107,107,.17)}.verdict.warn{background:rgba(255,193,90,.15)}.verdict.ok{background:rgba(62,231,154,.14)}
 .meta{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;font-size:13px;margin-bottom:6px}.meta dt{color:var(--mut)}.meta dd{word-break:break-all;margin:0}
 .gh{margin:24px 0 4px;font:600 15px "Sora",sans-serif;display:flex;gap:8px;align-items:center}.gh span{font:600 12px "Segoe UI";color:var(--mut)}
-.f{border-left:3px solid;padding:10px 12px;margin-top:8px;border-radius:0 8px 8px 0;font-size:13.5px}.f.high{background:#2a1020;border-color:var(--bad)}.f.medium{background:#2a2010;border-color:var(--warn)}.f.info{background:#0b1a44;border-color:var(--azure)}
-.f details{margin-top:4px}.f summary{cursor:pointer;color:var(--mut);font-size:12px}.f code{display:block;margin-top:4px;font:12px Consolas,monospace;color:#b8c7ea;word-break:break-all}
+.f{border-left:3px solid;padding:10px 12px;margin-top:8px;border-radius:0 8px 8px 0;font-size:13.5px}.f.high{background:rgba(255,107,107,.15);border-color:var(--bad)}.f.medium{background:rgba(255,193,90,.14);border-color:var(--warn)}.f.info{background:rgba(47,123,255,.2);border-color:var(--cyan)}
+.f details{margin-top:4px}.f summary{cursor:pointer;color:var(--mut);font-size:12px}.f code{display:block;margin-top:4px;font:12px Consolas,monospace;color:#d3e0ff;word-break:break-all}
 .note{font-size:12px;color:var(--mut)}
-#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#12255e;border:1px solid var(--azure);padding:10px 18px;border-radius:10px;font-size:14px;z-index:60}
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#0d3bb0;border:1px solid #8fe3ff;padding:10px 18px;border-radius:10px;font-size:14px;z-index:60}
 @media(max-width:700px){.stats div{padding:0 12px}.bar input{width:100%;margin-left:0}.hcol{display:none}}
 </style></head><body class="glow">
 <nav class="nav"><div class="wrap"><a class="logo" href="/"><img src="/logo.png" alt="">RynWeb PC Check</a><span class="sp"></span>
  <div id="who" class="hide"><img id="av" alt=""><span id="nm"></span><button class="btn ghost sm" onclick="logout()">Déconnexion</button></div></div></nav>
 <main class="wrap">
+<p id="loading" class="mut" style="text-align:center;margin-top:90px">Chargement…</p>
 <div class="center hide" id="login"><h1>Espace staff</h1><p class="mut">Connectez-vous pour créer des vérifications et lire les rapports.</p>
  <a class="btn dc" href="/auth/discord"><img src="/discord.svg" alt="">Continue with Discord</a>
  <p class="mut" style="text-align:center">New here? Same button — your Discord ID becomes your login.</p>
@@ -49,7 +50,7 @@ tr.r{cursor:pointer}tr.r:hover td{background:#0c173b}td small{display:block;colo
    <div class="newrow" style="margin-top:12px"><button class="btn" onclick="copyLink()">Copier le lien de téléchargement</button><button class="btn ghost" onclick="copyMsg()">Copier le lien et le code</button></div>
    <p class="note" style="margin-top:10px">Envoyez-les au joueur : il télécharge l'application, accepte, puis saisit le code (valable 24 h). Lui ne voit aucun résultat.</p></div></div>
  <div class="panel"><div class="bar" id="chips"></div>
-  <table><thead><tr><th>Joueur</th><th class="hcol">Date</th><th>Clean</th><th>Résultat</th></tr></thead><tbody id="rows"></tbody></table></div>
+  <div style="overflow-x:auto"><table><thead><tr><th>Joueur</th><th class="hcol">Date</th><th>Clean</th><th>Résultat</th></tr></thead><tbody id="rows"></tbody></table></div></div>
 </div></main>
 <footer class="foot"><div class="wrap"><a href="/privacy">Confidentialité</a><a href="/terms">Conditions</a><span>Les rapports sont supprimés automatiquement après <span id="ret">30</span> jours.</span></div></footer>
 <div id="shade" class="shade hide" onclick="closeD()"></div><aside id="drawer" class="drawer hide"></aside><div id="toast" class="hide"></div>
@@ -58,7 +59,7 @@ const $=id=>document.getElementById(id);let ALL=[],flt='all',q='',lastCode='',ti
 const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 const api=(p,o={})=>fetch(p,{...o,headers:{'Content-Type':'application/json'}}).then(async r=>({http:r.status,...(await r.json().catch(()=>({})))}));
 const link=()=>location.origin+'/download',tone=n=>n>=85?'ok':n>=60?'warn':'bad';
-function show(id){['login','activate','app'].forEach(x=>$(x).classList.toggle('hide',x!==id))}
+function show(id){$('loading').classList.add('hide');['login','activate','app'].forEach(x=>$(x).classList.toggle('hide',x!==id))}
 function toast(m){const t=$('toast');t.textContent=m;t.classList.remove('hide');clearTimeout(t._h);t._h=setTimeout(()=>t.classList.add('hide'),1800)}
 async function copy(t,m){try{await navigator.clipboard.writeText(t)}catch(e){const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();document.execCommand('copy');a.remove()}toast(m)}
 const copyLink=()=>copy(link(),'Lien copié');
@@ -85,7 +86,7 @@ function render(keep){const n={all:ALL.length,ok:0,warn:0,bad:0};ALL.forEach(c=>
 async function refresh(){const j=await api('/owner/checks');if(j.http===401||j.http===403){boot();return}
  ALL=j.checks;$('exp').textContent='Abonnement actif jusqu\'au '+new Date(j.expiresAt).toLocaleDateString();$('ret').textContent=j.retentionDays;render(!!$('q'))}
 function donut(v,size){const r=size*.42,C=2*Math.PI*r,col=`var(--${tone(v)=='ok'?'ok':tone(v)=='warn'?'warn':'bad'})`;
- return `<div class="donut" style="width:${size}px;height:${size}px"><svg width="${size}" height="${size}"><circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="#14275f" stroke-width="${size*.1}"/><circle class="arc" data-t="${(C*(1-v/100)).toFixed(1)}" cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="${col}" stroke-width="${size*.1}" stroke-linecap="round" stroke-dasharray="${C.toFixed(1)}" stroke-dashoffset="${C.toFixed(1)}"/></svg><div class="v" style="font-size:${size*.25}px">${v} %<small>clean</small></div></div>`}
+ return `<div class="donut" style="width:${size}px;height:${size}px"><svg width="${size}" height="${size}"><circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="${size*.1}"/><circle class="arc" data-t="${(C*(1-v/100)).toFixed(1)}" cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="${col}" stroke-width="${size*.1}" stroke-linecap="round" stroke-dasharray="${C.toFixed(1)}" stroke-dashoffset="${C.toFixed(1)}"/></svg><div class="v" style="font-size:${size*.25}px">${v} %<small>clean</small></div></div>`}
 function closeD(){$('drawer').classList.add('hide');$('shade').classList.add('hide');openCode=null}
 async function openCheck(code){openCode=code;$('drawer').classList.remove('hide');$('shade').classList.remove('hide');
  $('drawer').innerHTML='<p class="mut">Chargement…</p>';const j=await api('/owner/check/'+code);

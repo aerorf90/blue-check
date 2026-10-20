@@ -10,6 +10,7 @@ const RETENTION = Math.max(1, parseInt(process.env.RETENTION_DAYS) || 30) * DAY;
 const SECRET = process.env.SESSION_SECRET || crypto.createHash('sha256').update('sess:' + ADMIN).digest('hex');
 const DC_ID = process.env.DISCORD_CLIENT_ID, DC_SECRET = process.env.DISCORD_CLIENT_SECRET;
 const CONTACT = process.env.CONTACT_EMAIL || 'contact@votre-domaine.com';
+const INVITE = /^https:\/\/(discord\.gg|discord\.com\/invite)\/[\w-]+$/.test(process.env.DISCORD_INVITE || '') ? process.env.DISCORD_INVITE : '';
 
 // ---------- Stockage : MongoDB si MONGODB_URI, sinon fichier ----------
 let cache = { keys: {}, checks: {}, users: {} }, col = null, timer = null;
@@ -194,7 +195,7 @@ app.get('/privacy', legal('privacy.html'));
 app.get('/terms', legal('terms.html'));
 app.get('/health', (_, r) => r.send('ok'));
 app.get('/logo.png', page('logo.png'));
-app.get('/', page('index.html'));
+app.get('/', (_, r) => r.type('html').send(fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8').split('{{INVITE}}').join(INVITE)));
 app.get('/dashboard', page('dashboard.html'));
 app.get('/style.css', page('style.css'));
 app.get('/discord.svg', page('discord.svg'));

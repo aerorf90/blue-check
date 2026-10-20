@@ -1,30 +1,34 @@
-<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0a2579">
 <title>RynWeb PC Check — Vérification anti-triche pour serveurs FiveM</title>
 <meta name="description" content="Vérifiez le PC d'un joueur avec son accord et recevez un rapport clair : cheats connus, traces effacées, programmes de nettoyage.">
 <link rel="icon" href="/logo.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="/style.css">
 <style>
-.hero{padding:72px 0 40px}.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
-h1{font-size:clamp(34px,5vw,54px);line-height:1.08;font-weight:700}
-.hero p.lead{font-size:18px;color:#b9c9ee;margin:20px 0 28px;max-width:520px}.hero .note{color:var(--mut);font-size:13px;margin-top:14px}
-.rep{background:var(--panel);border:1px solid var(--line);border-radius:6px;box-shadow:0 30px 80px rgba(0,0,0,.45),0 0 0 1px rgba(25,198,255,.06)}
+.hero{padding:76px 0 36px}.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:52px;align-items:center}
+h1{font-size:clamp(34px,5vw,56px);line-height:1.08;font-weight:700}
+.lead{font-size:18px;color:#d3e0ff;margin:20px 0 28px;max-width:520px}.note{color:var(--mut);font-size:13px;margin-top:14px}
+.rep{background:rgba(5,20,80,.78);border:1px solid var(--line);border-radius:8px;box-shadow:0 34px 80px rgba(2,10,50,.55)}
 .rep-top{display:flex;align-items:center;gap:8px;padding:12px 18px;border-bottom:1px solid var(--line);font-size:13px;color:var(--mut)}.rep-top i{width:8px;height:8px;border-radius:50%;background:var(--bad)}
-.rep-main{display:flex;align-items:center;gap:22px;padding:22px 18px}.rep-main b{font:700 19px "Sora",sans-serif;display:block;margin-bottom:4px;color:var(--bad)}.rep-main span{color:var(--mut);font-size:13px}
+.rep-main{display:flex;align-items:center;gap:22px;padding:22px 18px}.rep-main b{font:700 19px "Sora",sans-serif;display:block;margin-bottom:4px;color:#ff9a9a}.rep-main span{color:var(--mut);font-size:13px}
 .rep ul{list-style:none;padding:0 18px 18px}.rep li{border-left:3px solid;padding:9px 12px;margin-top:8px;font-size:13px;border-radius:0 6px 6px 0}.rep li small{display:block;color:var(--mut);font-size:11px;margin-top:2px}
-.rep li.bad{background:#2a1020;border-color:var(--bad)}.rep li.warn{background:#2a2010;border-color:var(--warn)}
-section{padding:64px 0 0}h2{font-size:clamp(26px,3.4vw,36px);line-height:1.15;max-width:640px}
+.rep li.bad{background:rgba(255,107,107,.15);border-color:var(--bad)}.rep li.warn{background:rgba(255,193,90,.14);border-color:var(--warn)}
+.src{margin-top:34px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-size:13px;color:var(--mut)}.src span.t{margin-right:6px}
+.src i{font-style:normal;padding:6px 12px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.07);color:#fff}
+section{padding:72px 0 0}h2{font-size:clamp(26px,3.4vw,36px);line-height:1.15;max-width:660px}
 .rows{display:grid;grid-template-columns:1fr 1fr;column-gap:56px;margin-top:30px}
-.row{display:flex;gap:16px;padding:20px 0;border-top:1px solid var(--line)}.row svg{flex:none;width:26px;height:26px;stroke:var(--cyan);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;margin-top:2px}
+.row{display:flex;gap:16px;padding:20px 0;border-top:1px solid var(--line)}.row svg{flex:none;width:28px;height:28px;stroke:#8fe3ff;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;margin-top:2px}
 .row b{display:block;font-size:16px;margin-bottom:2px}.row span{color:var(--mut);font-size:14px}
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:36px;margin-top:34px}.step .n{font:700 46px "Sora",sans-serif;color:transparent;-webkit-text-stroke:1px var(--azure);line-height:1}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:36px;margin-top:34px}.step .n{font:700 48px "Sora",sans-serif;color:transparent;-webkit-text-stroke:1.5px #8fe3ff;line-height:1}
 .step b{display:block;font-size:17px;margin:12px 0 4px}.step span{color:var(--mut);font-size:14px}
-.trust{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:start}.trust ul{list-style:none;padding:0}.trust li{padding:14px 0 14px 34px;border-top:1px solid var(--line);position:relative;color:#c4d3f2}
+.trust{display:grid;grid-template-columns:.9fr 1.1fr;gap:48px;align-items:start}.trust ul{list-style:none;padding:0}.trust li{padding:14px 0 14px 34px;border-top:1px solid var(--line);position:relative;color:#dbe6ff}
 .trust li::before{content:"";position:absolute;left:4px;top:19px;width:14px;height:8px;border-left:2px solid var(--ok);border-bottom:2px solid var(--ok);transform:rotate(-45deg)}
-.cta{margin-top:72px;padding:48px;border:1px solid var(--line);border-radius:14px;background:linear-gradient(135deg,rgba(30,107,255,.22),rgba(25,198,255,.06));display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
-.cta h2{max-width:480px}
-@media(max-width:860px){.hero .wrap,.trust{grid-template-columns:1fr}.rows,.steps{grid-template-columns:1fr}.cta{padding:30px}}
+.faq{max-width:760px;margin-top:26px}.faq details{border-top:1px solid var(--line);padding:16px 0}.faq details:last-child{border-bottom:1px solid var(--line)}
+.faq summary{cursor:pointer;font-weight:600;font-size:16px}.faq p{margin-top:8px;color:var(--mut);font-size:15px}
+.cta{margin-top:80px;padding:48px;border:1px solid var(--line);border-radius:16px;background:linear-gradient(135deg,rgba(90,160,255,.35),rgba(34,211,255,.1));display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.cta h2{max-width:480px}.cta .acts{display:flex;gap:12px;flex-wrap:wrap}
+@media(max-width:860px){.hero .wrap,.trust{grid-template-columns:1fr}.rows,.steps{grid-template-columns:1fr}.cta{padding:30px}.hero{padding-top:44px}}
 </style></head><body class="glow">
 <nav class="nav"><div class="wrap"><a class="logo" href="/"><img src="/logo.png" alt="">RynWeb PC Check</a>
- <div class="links"><a href="#rapport">Le rapport</a><a href="#etapes">Comment ça marche</a><a href="#joueur">Respect du joueur</a></div><span class="sp"></span>
+ <div class="links"><a href="#rapport">Le rapport</a><a href="#etapes">Comment ça marche</a><a href="#joueur">Respect du joueur</a><a href="#faq">Questions</a></div><span class="sp"></span>
  <a class="btn sm" id="navcta" href="/auth/discord">Se connecter</a></div></nav>
 
 <header class="hero"><div class="wrap">
@@ -34,12 +38,13 @@ section{padding:64px 0 0}h2{font-size:clamp(26px,3.4vw,36px);line-height:1.15;ma
   <p class="note">Nouveau ici ? Même bouton : votre ID Discord devient votre identifiant.</p></div>
  <div class="rep" aria-label="Exemple de rapport">
   <div class="rep-top"><i></i>Exemple de rapport</div>
-  <div class="rep-main"><div class="donut" style="width:104px;height:104px"><svg width="104" height="104" viewBox="0 0 104 104"><circle cx="52" cy="52" r="44" fill="none" stroke="#14275f" stroke-width="10"/><circle class="arc" id="arc" cx="52" cy="52" r="44" fill="none" stroke="#ff5d5d" stroke-width="10" stroke-linecap="round" stroke-dasharray="276.46" stroke-dashoffset="276.46"/></svg><div class="v" style="font-size:26px">34 %<small>clean</small></div></div>
+  <div class="rep-main"><div class="donut" style="width:104px;height:104px"><svg width="104" height="104" viewBox="0 0 104 104"><circle cx="52" cy="52" r="44" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="10"/><circle class="arc" id="arc" cx="52" cy="52" r="44" fill="none" stroke="#ff6b6b" stroke-width="10" stroke-linecap="round" stroke-dasharray="276.46" stroke-dashoffset="276.46"/></svg><div class="v" style="font-size:26px">34 %<small>clean</small></div></div>
    <div><b>Cheat détecté : Keyser</b><span>Un programme de nettoyage a aussi été trouvé.</span></div></div>
   <ul><li class="bad">Ce PC a contacté le site du cheat « Keyser » récemment.<small>Cache DNS — api.keyser-lts.com</small></li>
    <li class="bad">Le programme du cheat « Keyser » a déjà été lancé sur ce PC.<small>Historique Windows — dernière fois : 12/10/2026 21:40</small></li>
    <li class="warn">Un programme de nettoyage (« CCleaner ») est installé sur ce PC.<small>Il peut servir à effacer des traces</small></li></ul></div>
-</div></header>
+</div>
+<div class="wrap"><div class="src"><span class="t">Cinq sources croisées dans chaque rapport :</span><i>Fichiers</i><i>Sites contactés</i><i>Historique Windows</i><i>Journaux système</i><i>Dossiers FiveM et GTA V</i></div></div></header>
 
 <main class="wrap">
 <section id="rapport"><h2>Un rapport que tout le staff comprend</h2>
@@ -66,10 +71,20 @@ section{padding:64px 0 0}h2{font-size:clamp(26px,3.4vw,36px);line-height:1.15;ma
  <li>Les rapports sont supprimés automatiquement après 30 jours.</li></ul></div>
  <p style="margin-top:18px"><a href="/privacy">Lire la politique de confidentialité</a></p></section>
 
-<div class="cta"><h2>Vérifiez votre premier joueur aujourd'hui</h2><a class="btn dc" href="/auth/discord"><img src="/discord.svg" alt="">Continue with Discord</a></div>
+<section id="faq"><h2>Questions fréquentes</h2><div class="faq">
+ <details><summary>Le joueur voit-il le résultat ?</summary><p>Non. Il voit seulement que la vérification est terminée. Le rapport n'apparaît que dans votre dashboard.</p></details>
+ <details><summary>Que se passe-t-il si le joueur refuse ?</summary><p>Rien ne démarre sans son accord. Vous décidez des suites selon le règlement de votre serveur.</p></details>
+ <details><summary>L'indice clean prouve-t-il quelque chose ?</summary><p>Non. C'est un indicateur pour trier vite. Vérifiez toujours les éléments avant de sanctionner.</p></details>
+ <details><summary>L'outil détecte-t-il tous les cheats ?</summary><p>Aucun outil ne le peut. Il reconnaît des cheats connus et les signes de dissimulation, et la liste est mise à jour régulièrement.</p></details>
+ <details><summary>Combien de temps dure une clé ?</summary><p>La durée achetée, 30 jours par exemple, à partir de son activation avec votre compte Discord.</p></details>
+ <details><summary>Quelles données sont conservées ?</summary><p>Le rapport, supprimé automatiquement après 30 jours. Le détail est dans la politique de confidentialité.</p></details>
+</div></section>
+
+<div class="cta"><h2>Vérifiez votre premier joueur aujourd'hui</h2><div class="acts"><a class="btn dc" href="/auth/discord"><img src="/discord.svg" alt="">Continue with Discord</a><a class="btn ghost getkey" id="getkey" href="{{INVITE}}" target="_blank" rel="noopener">Obtenir une clé sur Discord</a></div></div>
 </main>
 <footer class="foot"><div class="wrap"><span>RynWeb PC Check</span><a href="/privacy">Confidentialité</a><a href="/terms">Conditions</a><a href="/download">Télécharger l'application joueur</a></div></footer>
 <script>
 requestAnimationFrame(()=>setTimeout(()=>{document.getElementById('arc').style.strokeDashoffset=(276.46*(1-.34)).toFixed(1)},250));
+const gk=document.getElementById('getkey');if(!gk.getAttribute('href')||gk.getAttribute('href').indexOf('{{')===0)gk.classList.add('hide');
 fetch('/owner/me').then(r=>{if(r.ok){const a=document.getElementById('navcta');a.textContent='Ouvrir le dashboard';a.href='/dashboard'}}).catch(()=>{});
 </script></body></html>

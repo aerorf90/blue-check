@@ -1,15 +1,17 @@
-BLUE DETECTED — SITE + API
+BLUE DETECTED — WEB SITE AND REPORT SERVICES
 
-Ce dossier contient le site web, le serveur Node.js, le tableau de bord des propriétaires de serveurs, les pages légales et le système de clés.
+Requirements: Node.js 20 or later. Install dependencies with npm ci.
 
-Installation :
-1. Installer Node.js 18 ou supérieur.
-2. Dans ce dossier, exécuter : npm install
-3. Définir ADMIN_TOKEN avec une longue valeur secrète.
-4. Configurer DISCORD_CLIENT_ID, DISCORD_CLIENT_SECRET et BASE_URL pour OAuth Discord.
-5. Configurer DOWNLOAD_URL vers le ZIP du scanner Blue Detected.
-6. Démarrer avec : npm start
+Primary website:
+1. Configure ADMIN_TOKEN and SESSION_SECRET with different random secrets (at least 32 bytes each).
+2. Configure DISCORD_CLIENT_ID, DISCORD_CLIENT_SECRET, and BASE_URL, then register BASE_URL/auth/discord/callback in the Discord application.
+3. Configure MONGODB_URI for persistent storage in production. Production startup refuses to use a local JSON file.
+4. Optionally set DOWNLOAD_URL, CONTACT_EMAIL, and DISCORD_INVITE to real values.
+5. Start with npm start.
 
-Variables utiles : ADMIN_TOKEN (obligatoire), SESSION_SECRET, DISCORD_CLIENT_ID, DISCORD_CLIENT_SECRET, BASE_URL, DOWNLOAD_URL, DISCORD_INVITE, CONTACT_EMAIL, RETENTION_DAYS, PORT, MONGODB_URI.
+Separate PostgreSQL owner-report service:
+1. Configure DATABASE_URL, OWNER_PASSWORD, SESSION_SECRET, and a distinct KEY_PEPPER.
+2. Start with npm run start:owners.
 
-Sécurité : servir uniquement en HTTPS en production; ne jamais publier ADMIN_TOKEN ou les secrets Discord. Les résultats d'analyse sont des indicateurs à examiner par le staff, pas une preuve automatique.
+The PostgreSQL demo starts with npm run start:local and is limited to 127.0.0.1. Never deploy its public demo password.
+Run npm test to verify the owner-report workflow. No service is deployed automatically.

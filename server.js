@@ -1,5 +1,5 @@
 // Serveur Blue Detected
-// Required in production: ADMIN_TOKEN, SESSION_SECRET, DATABASE_URL, BASE_URL,
+// Required in production: ADMIN_TOKEN, SESSION_SECRET, MONGODB_URI, BASE_URL,
 // DISCORD_CLIENT_ID, DISCORD_CLIENT_SECRET.
 const express = require('express'), crypto = require('crypto'), fs = require('fs'), path = require('path');
 const helmet = require('helmet');
@@ -14,7 +14,6 @@ const {
   positiveIntegerFromEnv
 } = require('./traffic-protection');
 const { createWriteQueue } = require('./write-queue');
-const { Pool } = require('pg');
 const ADMIN = process.env.ADMIN_TOKEN;
 if (!ADMIN) throw new Error('ADMIN_TOKEN must be configured.');
 const FILE = process.env.DATA_FILE || path.join(__dirname, 'data.json');
@@ -33,7 +32,7 @@ if (process.env.NODE_ENV === 'production') {
     throw new Error('SESSION_SECRET must contain at least 32 bytes in production.');
   }
   if (ADMIN === process.env.SESSION_SECRET) throw new Error('ADMIN_TOKEN and SESSION_SECRET must be different secrets.');
-  if (!process.env.DATABASE_URL) throw new Error('DATABASE_URL is required in production; file storage is not durable on hosted instances.');
+  if (!process.env.MONGODB_URI) throw new Error('MONGODB_URI is required in production; file storage is not durable on hosted instances.');
   let publicBaseUrl;
   try { publicBaseUrl = new URL(process.env.BASE_URL); } catch {}
   if (!publicBaseUrl || publicBaseUrl.protocol !== 'https:' || publicBaseUrl.username || publicBaseUrl.password ||
@@ -55,7 +54,7 @@ if (DOWNLOAD_URL) {
   }
 }
 
-let cache = { keys: {}, checks: {}, users: {} }, pgPool = null, initialized = false;
+let cache = { keys: {}, checks: {}, users: {} }, col = null, mongoClient = null, initialized = false;
 const maxPendingWrites = positiveIntegerFromEnv('MAX_PENDING_WRITES', 250);
 const enqueueWrite = createWriteQueue(maxPendingWrites);
 const load = () => cache;
@@ -63,11 +62,8 @@ const isRecord = (value) => value !== null && typeof value === 'object' && !Arra
 
 async function persist(data) {
   const snapshot = structuredClone(data);
-  if (pgPool) {
-    await pgPool.query(
-      'INSERT INTO blue_detected_store (id, data) VALUES ($1, $2::jsonb) ON CONFLICT (id) DO UPDATE SET data = EXCLUDED.data, updated_at = NOW()',
-      ['main', JSON.stringify(snapshot)]
-    );
+  if (col) {
+    await col.updateOne({ _id: 'data' }, { $set: { data: snapshot } }, { upsert: true });
   } else {
     const temporaryFile = `${FILE}.${process.pid}.tmp`;
     fs.mkdirSync(path.dirname(FILE), { recursive: true });
@@ -87,36 +83,27 @@ function updateData(mutator) {
 }
 
 async function init() {
-  if (process.env.DATABASE_URL) {
-    pgPool = new Pool({
-      connectionString: process.env.DATABASE_URL,
-      // Render's internal PostgreSQL connection string is intended for private
-      // service-to-database traffic. Set PGSSL=true only if your provider requires TLS.
-      ssl: process.env.PGSSL === 'true' ? { rejectUnauthorized: false } : undefined,
-      max: 10,
-      idleTimeoutMillis: 30000,
-      connectionTimeoutMillis: 10000
-    });
-    await pgPool.query(`
-      CREATE TABLE IF NOT EXISTS blue_detected_store (
-        id TEXT PRIMARY KEY,
-        data JSONB NOT NULL,
-        updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
-      )
-    `);
-    const result = await pgPool.query('SELECT data FROM blue_detected_store WHERE id = $1', ['main']);
-    if (result.rows.length) {
-      if (!isRecord(result.rows[0].data)) throw new Error('PostgreSQL contains an invalid application data document.');
-      cache = result.rows[0].data;
+  if (process.env.MONGODB_URI) {
+    const { MongoClient } = require('mongodb');
+    mongoClient = new MongoClient(process.env.MONGODB_URI, { serverSelectionTimeoutMS: 10000 });
+    await mongoClient.connect();
+    col = mongoClient.db(process.env.MONGODB_DATABASE || 'pccheck').collection('store');
+    const doc = await col.findOne({ _id: 'data' });
+    if (doc) {
+      if (!isRecord(doc.data)) {
+        throw new Error('MongoDB contains an invalid application data document.');
+      }
+      cache = doc.data;
     } else {
-      await pgPool.query('INSERT INTO blue_detected_store (id, data) VALUES ($1, $2::jsonb)', ['main', JSON.stringify(cache)]);
+      await col.insertOne({ _id: 'data', data: cache });
     }
-    console.log('PostgreSQL persistence connected.');
+    console.log('MongoDB persistence connected.');
   } else if (fs.existsSync(FILE)) {
     cache = JSON.parse(fs.readFileSync(FILE, 'utf8'));
-    if (!isRecord(cache)) throw new Error('Local data file has an invalid format.');
+    if (!isRecord(cache)) {
+      throw new Error('Local data file has an invalid format.');
+    }
   }
-
   for (const collection of ['keys', 'checks', 'users']) {
     if (cache[collection] === undefined) cache[collection] = {};
     else if (!isRecord(cache[collection])) throw new Error(`Stored ${collection} data has an invalid format.`);
@@ -143,6 +130,12 @@ const app = express();
 app.disable('x-powered-by');
 app.use(helmet({ contentSecurityPolicy: false }));
 applyTrafficProtection(app, ['/auth', '/owner', '/seller', '/validate-code', '/submit']);
+app.use((req, res, next) => {
+  if (req.path.startsWith('/owner') || req.path.startsWith('/seller')) {
+    res.setHeader('Cache-Control', 'no-store');
+  }
+  next();
+});
 app.use(express.json({ limit: '1mb' }));
 const sellerLimit = positiveIntegerFromEnv('SELLER_RATE_LIMIT_PER_10_MINUTES', 40);
 const sellerLimiter = rateLimit({
@@ -446,8 +439,8 @@ app.get('/terms', legal('terms.html'));
 app.get('/health', async (_req, res) => {
   if (!initialized) return res.status(503).json({ status: 'not_ready' });
   try {
-    if (pgPool) await pgPool.query('SELECT 1');
-    res.json({ status: 'ok', storage: pgPool ? 'postgresql' : 'local' });
+    if (mongoClient) await mongoClient.db().command({ ping: 1 });
+    res.json({ status: 'ok', storage: col ? 'mongodb' : 'local' });
   } catch (error) {
     console.error('Website health check failed:', error.message);
     res.status(503).json({ status: 'not_ready' });
@@ -457,6 +450,7 @@ app.get('/logo.png', page('logo.png'));
 app.get('/', (_, r) => r.type('html').send(fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8').split('{{INVITE}}').join(INVITE)));
 app.get('/dashboard', page('dashboard.html'));
 app.get('/style.css', page('style.css'));
+app.get('/language.js', page('language.js'));
 app.get('/discord.svg', page('discord.svg'));
 app.get('/seller', page('seller.html'));
 
@@ -472,7 +466,7 @@ async function start() {
   const server = configureHttpServer(app.listen(port, host, () => console.log(`Blue Detected website listening on ${host}:${port}.`)));
   server.on('close', async () => {
     clearInterval(purgeTimer);
-    await pgPool?.end();
+    await mongoClient?.close();
   });
   return server;
 }

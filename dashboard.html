@@ -1,8 +1,7 @@
 <!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dashboard — Blue Detected</title>
 <link rel="icon" href="/logo.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0a0508;--bg2:#12070d;--panel:rgba(255,255,255,.035);--panel2:rgba(255,255,255,.06);--line:rgba(255,80,130,.2);--acc:#ff3d78;--acc2:#c2185b;--accsoft:rgba(255,61,120,.14);--t:#f6eef1;--mut:#a8909a;--ok:#3ee79a;--warn:#ffc15a;--bad:#ff5a7a;--cyan:#5fd8ff;--drawer:#14070d;--glow:rgba(255,61,120,.16)}
-body[data-theme="blue"]{--bg:#050b1c;--bg2:#08122b;--panel:rgba(255,255,255,.035);--panel2:rgba(255,255,255,.06);--line:rgba(90,150,255,.25);--acc:#2f7bff;--acc2:#1b5ff0;--accsoft:rgba(47,123,255,.16);--t:#eef4ff;--mut:#93a8d2;--bad:#ff6b6b;--drawer:#081437;--glow:rgba(47,123,255,.18)}
+:root{--bg:#050b1c;--bg2:#08122b;--panel:rgba(255,255,255,.035);--panel2:rgba(255,255,255,.06);--line:rgba(90,150,255,.25);--acc:#2f7bff;--acc2:#1b5ff0;--accsoft:rgba(47,123,255,.16);--t:#eef4ff;--mut:#93a8d2;--ok:#3ee79a;--warn:#ffc15a;--bad:#ff6b6b;--cyan:#5fd8ff;--drawer:#081437;--glow:rgba(47,123,255,.18)}
 *{box-sizing:border-box;margin:0}
 html{background:var(--bg)}
 body{font-family:"Segoe UI",system-ui,-apple-system,sans-serif;color:var(--t);line-height:1.5;min-height:100vh;-webkit-font-smoothing:antialiased;background:radial-gradient(900px 500px at 70% -10%,var(--glow),transparent 60%),radial-gradient(700px 500px at 0% 100%,var(--glow),transparent 60%),var(--bg);background-attachment:fixed}
@@ -34,8 +33,6 @@ input{background:rgba(255,255,255,.05);border:1px solid var(--line);border-radiu
 .shell{display:grid;grid-template-columns:230px 1fr;min-height:100vh}
 .side{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;gap:6px;padding:18px 14px;background:rgba(0,0,0,.28);border-right:1px solid var(--line)}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--t);padding:4px 6px 10px}.brand img{height:30px}.brand b{display:block;font:700 15px "Sora",sans-serif;color:var(--acc)}.brand small{display:block;font-size:10.5px;color:var(--mut)}
-.theme{display:flex;align-items:center;gap:10px;width:100%;padding:10px 12px;margin-bottom:10px;border-radius:10px;background:var(--accsoft);border:1px solid var(--line);color:var(--t);font:600 12px "Segoe UI",sans-serif;cursor:pointer;text-align:left}
-.theme small{display:block;font-weight:500;color:var(--mut);font-size:10.5px;letter-spacing:.06em}
 .nl{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:9px;color:var(--mut);text-decoration:none;font-size:13.5px;border:1px solid transparent}
 .nl:hover{background:var(--panel2);color:var(--t)}.nl.on{color:var(--t);background:var(--accsoft);border-color:var(--line)}
 .sp{flex:1}
@@ -45,10 +42,11 @@ input{background:rgba(255,255,255,.05);border:1px solid var(--line);border-radiu
 .hd{display:flex;justify-content:space-between;align-items:flex-end;gap:18px;flex-wrap:wrap;margin-bottom:20px}.hd h1{font-size:27px;margin:4px 0 4px}.hd p{font-size:13px;color:var(--mut);max-width:420px}
 .tools{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.tools input{width:200px;padding:8px 12px;font-size:13px}
 .cap{font:600 11.5px "JetBrains Mono",monospace;color:var(--mut);padding:8px 12px;border:1px solid var(--line);border-radius:9px}
-.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px;perspective:1000px}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;position:relative;overflow:hidden}
 .card::before{content:"";position:absolute;left:0;top:0;height:2px;width:34px;background:var(--c,var(--acc))}
 .card span{font:500 10px "JetBrains Mono",monospace;letter-spacing:.16em;color:var(--mut);text-transform:uppercase}.card b{display:block;font:700 24px "JetBrains Mono",monospace;margin-top:4px;color:var(--c,var(--t))}
+.card[role="button"]{cursor:pointer;text-align:left;color:inherit;font:inherit}.card[role="button"]:hover{border-color:var(--acc);background:var(--panel2)}
 .chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
 .chip{display:inline-flex;gap:8px;align-items:center;background:transparent;border:1px solid var(--line);color:var(--mut);border-radius:999px;padding:6px 14px;font:600 12.5px "Segoe UI",sans-serif;cursor:pointer}.chip em{font:600 10.5px "JetBrains Mono",monospace;font-style:normal;background:var(--panel2);border-radius:6px;padding:1px 6px}
 .chip.on{background:var(--accsoft);border-color:var(--acc);color:var(--t)}
@@ -87,7 +85,15 @@ td{padding:11px 14px;border-top:1px solid var(--line);white-space:nowrap}tr.r:ho
 .distl{display:flex;gap:16px;flex-wrap:wrap;font-size:11.5px;color:var(--mut);margin-bottom:16px}.distl b{color:var(--t)}
 .rel{font-size:12px;color:var(--mut)}
 #toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--drawer);border:1px solid var(--acc);padding:10px 18px;border-radius:10px;font-size:14px;z-index:60}
-@media(max-width:900px){.shell{grid-template-columns:1fr}.side{position:static;height:auto;flex-direction:row;flex-wrap:wrap;align-items:center}.side .sp{display:none}.theme{width:auto}.main{padding:20px 16px 40px}.cards{grid-template-columns:repeat(2,1fr)}.tools input{width:100%}}
+@media(max-width:900px){.shell{grid-template-columns:1fr}.side{position:static;height:auto;flex-direction:row;flex-wrap:wrap;align-items:center}.side .sp{display:none}.main{padding:20px 16px 40px}.cards{grid-template-columns:repeat(2,1fr)}.tools input{width:100%}}
+@media(max-width:900px){.tools #q{flex:1;min-width:0}.tools .search-clear{flex-shrink:0}}
+.tilt-card{--rx:0deg;--ry:0deg;--mx:50%;--my:50%;transform:perspective(900px) rotateX(var(--rx)) rotateY(var(--ry));transform-style:preserve-3d;transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}
+.tilt-card::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;background:radial-gradient(circle at var(--mx) var(--my),rgba(130,190,255,.16),transparent 58%);transition:opacity .2s ease}
+.tilt-card.is-tilting{box-shadow:0 16px 34px rgba(0,0,0,.22),0 0 24px rgba(47,123,255,.1)}
+.tilt-card.is-tilting::after{opacity:1}
+.card>*{position:relative;z-index:1}
+#resultCount{font-size:12px;color:var(--mut);min-width:105px}
+@media(prefers-reduced-motion:reduce){.tilt-card,.tilt-card::after{transition:none!important}.tilt-card{transform:none!important}}
 </style></head><body data-theme="blue">
 <p id="loading" class="mut" style="text-align:center;margin-top:90px">Chargement…</p>
 <div class="center hide" id="login"><h1>Espace staff</h1><p class="mut">Connectez-vous pour créer des codes d'accès et lire les rapports. Votre session reste active 24 heures avant de demander une nouvelle connexion.</p><p id="loginMsg" class="mut" role="status"></p>
@@ -102,7 +108,6 @@ td{padding:11px 14px;border-top:1px solid var(--line);white-space:nowrap}tr.r:ho
 <div id="app" class="shell hide">
  <aside class="side">
   <a class="brand" href="/"><img src="/logo.png" alt=""><span><b>Blue Detected</b><small>Anti-Cheat Dashboard</small></span></a>
-  <button class="theme" onclick="toggleTheme()"><span>●</span><span>Thème<small id="themeName">BLUE</small></span></button>
   <a class="nl on" href="#" onclick="setF('all');return false">▦ Codes d'accès</a>
   <a class="nl" href="#" onclick="setF('used');return false">☰ Résultats</a>
   <a class="nl" href="#" onclick="openNew();return false">⚿ Générer un code</a>
@@ -115,8 +120,8 @@ td{padding:11px 14px;border-top:1px solid var(--line);white-space:nowrap}tr.r:ho
  </aside>
  <main class="main">
   <div class="hd"><div><div class="eyebrow">// Registre d'accès</div><h1>Codes d'accès</h1><p>Créez jusqu'à <span id="maxA">3</span> codes à la fois. Un code reste disponible jusqu'à ce que le joueur l'utilise ou qu'il expire (24 h).</p></div>
-   <div class="tools"><input id="q" placeholder="Rechercher…" oninput="q=this.value.toLowerCase();render()"><span class="cap" id="cap">0/3 dispo</span><button class="btn ghost sm" onclick="refresh(true)">⟳ Actualiser</button><button class="btn" onclick="openNew()">Générer un code</button></div></div>
-  <div class="cards"><div class="card" style="--c:var(--ok)"><span>Disponibles</span><b id="s-av">0</b></div><div class="card" style="--c:var(--warn)"><span>En scan</span><b id="s-sc">0</b></div><div class="card" style="--c:var(--acc)"><span>Utilisés</span><b id="s-us">0</b></div><div class="card" style="--c:var(--mut)"><span>Expirés</span><b id="s-ex">0</b></div></div>
+   <div class="tools"><input id="q" aria-label="Rechercher par joueur, code ou statut" placeholder="Rechercher joueur, code, statut…" oninput="q=this.value.trim().toLowerCase();render()"><button class="btn ghost sm search-clear" type="button" onclick="clearSearch()" aria-label="Effacer la recherche">Effacer</button><span id="resultCount" aria-live="polite"></span><span class="cap" id="cap">0/3 dispo</span><button class="btn ghost sm" onclick="refresh(true)">⟳ Actualiser</button><button class="btn" onclick="openNew()">Générer un code</button></div></div>
+  <div class="cards"><div class="card tilt-card" role="button" tabindex="0" aria-label="Filtrer les codes disponibles" onclick="setF('available')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();setF('available')}" style="--c:var(--ok)"><span>Disponibles</span><b id="s-av">0</b></div><div class="card tilt-card" role="button" tabindex="0" aria-label="Filtrer les codes en scan" onclick="setF('scanning')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();setF('scanning')}" style="--c:var(--warn)"><span>En scan</span><b id="s-sc">0</b></div><div class="card tilt-card" role="button" tabindex="0" aria-label="Filtrer les codes utilisés" onclick="setF('used')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();setF('used')}" style="--c:var(--acc)"><span>Utilisés</span><b id="s-us">0</b></div><div class="card tilt-card" role="button" tabindex="0" aria-label="Filtrer les codes expirés" onclick="setF('expired')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();setF('expired')}" style="--c:var(--mut)"><span>Expirés</span><b id="s-ex">0</b></div></div>
   <div id="dist"></div>
   <div class="chips" id="chips"></div>
   <div id="activeWrap"></div>
@@ -132,10 +137,8 @@ const $=id=>document.getElementById(id);let ALL=[],flt='all',q='',lastCode='',ti
 const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 const api=(p,o={})=>fetch(p,{...o,headers:{'Content-Type':'application/json'}}).then(async r=>({http:r.status,...(await r.json().catch(()=>({})))}));
 const link=()=>location.origin+'/download',tone=n=>n>=85?'ok':n>=60?'warn':'bad';
-function theme(t){document.body.dataset.theme=t;$('themeName')&&($('themeName').textContent=t.toUpperCase());try{localStorage.setItem('bd-theme',t)}catch(e){}}
-function toggleTheme(){theme(document.body.dataset.theme==='crimson'?'blue':'crimson')}
-try{const t=localStorage.getItem('bd-theme');if(t==='blue'||t==='crimson')document.body.dataset.theme=t}catch(e){}
-function show(id){$('loading').classList.add('hide');['login','activate','app'].forEach(x=>$(x).classList.toggle('hide',x!==id));$('themeName')&&($('themeName').textContent=document.body.dataset.theme.toUpperCase())}
+try{if(localStorage.getItem('bd-theme')==='crimson')localStorage.setItem('bd-theme','blue')}catch(e){}
+function show(id){$('loading').classList.add('hide');['login','activate','app'].forEach(x=>$(x).classList.toggle('hide',x!==id))}
 function requireLogin(message=''){clearInterval(timer);timer=null;$('loginMsg').textContent=message;show('login')}
 function toast(m){const t=$('toast');t.textContent=m;t.classList.remove('hide');clearTimeout(t._h);t._h=setTimeout(()=>t.classList.add('hide'),1800)}
 async function copy(t,m){try{await navigator.clipboard.writeText(t)}catch(e){const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();document.execCommand('copy');a.remove()}toast(m)}
@@ -158,6 +161,9 @@ const st=c=>c.done?'used':c.expired?'expired':c.scanning?'scanning':'available';
 const SL={available:['ok','Disponible'],scanning:['warn','En scan'],used:['bad','Utilisé'],expired:['off','Expiré']};
 const statsOf=c=>c.stats&&typeof c.stats==='object'&&!Array.isArray(c.stats)?c.stats:{};
 function setF(k){flt=k;render()}
+function clearSearch(){$('q').value='';q='';render();$('q').focus()}
+function statusLabel(c){return {available:'disponible',scanning:'en scan',used:'utilisé',expired:'expiré'}[st(c)]}
+function matchesSearch(c){if(!q)return true;return [c.player,c.code,statusLabel(c)].some(value=>String(value||'').toLowerCase().includes(q))}
 function digits(code,sm){return `<span class="digits${sm?' sm':''}">${String(code).split('').map(d=>`<span class="d">${esc(d)}</span>`).join('')}</span>`}
 function left(ms){if(ms<=0)return '—';const h=Math.floor(ms/3600000),m=Math.floor(ms%3600000/60000);return h+'h '+String(m).padStart(2,'0')+'m'}
 function ago(t){const m=Math.floor((Date.now()-t)/60000);if(m<1)return "à l'instant";if(m<60)return 'il y a '+m+' min';const h=Math.floor(m/60);if(h<24)return 'il y a '+h+' h';return 'il y a '+Math.floor(h/24)+' j'}
@@ -170,10 +176,11 @@ function render(){const n={available:0,scanning:0,used:0,expired:0};ALL.forEach(
  const dn={ok:0,warn:0,bad:0};ALL.filter(c=>c.done).forEach(c=>{const stats=statsOf(c);dn[stats.high?'bad':stats.medium?'warn':'ok']++});const dt=dn.ok+dn.warn+dn.bad;
  $('dist').innerHTML=dt?`<div class="dist"><i style="width:${dn.ok/dt*100}%;background:var(--ok)"></i><i style="width:${dn.warn/dt*100}%;background:var(--warn)"></i><i style="width:${dn.bad/dt*100}%;background:var(--bad)"></i></div><div class="distl"><span><b>${dn.ok}</b> propres</span><span><b>${dn.warn}</b> à vérifier</span><span><b>${dn.bad}</b> risque élevé</span></div>`:'';
  const cur=ALL.filter(c=>st(c)==='available').sort((a,b)=>b.createdAt-a.createdAt)[0];
- $('activeWrap').innerHTML=cur?`<div class="sec">Code actif</div><div class="active"><div><div class="lbl">DISPONIBLE</div>${digits(cur.code)}</div><div class="act"><button class="btn ghost sm" onclick="copyCode('${esc(cur.code)}')">Copier le code</button><button class="btn sm" onclick="copyMsg('${esc(cur.code)}')">Copier lien + code</button><span class="exp">Expire dans ${left((cur.expiresAt||cur.createdAt+864e5)-Date.now())}</span></div></div>`:'';
- const list=ALL.filter(c=>(flt==='all'||st(c)===flt)&&(!q||(c.player||'').toLowerCase().includes(q)||c.code.includes(q)));
+ $('activeWrap').innerHTML=cur?`<div class="sec">Code actif</div><div class="active tilt-card"><div><div class="lbl">DISPONIBLE</div>${digits(cur.code)}</div><div class="act"><button class="btn ghost sm" onclick="copyCode('${esc(cur.code)}')">Copier le code</button><button class="btn sm" onclick="copyMsg('${esc(cur.code)}')">Copier lien + code</button><span class="exp">Expire dans ${left((cur.expiresAt||cur.createdAt+864e5)-Date.now())}</span></div></div>`:'';
+ const list=ALL.filter(c=>(flt==='all'||st(c)===flt)&&matchesSearch(c));
+ $('resultCount').textContent=list.length+' / '+ALL.length+' résultat';
  $('rows').innerHTML=list.map(c=>{const s=st(c),[tn,tl]=SL[s],ex=(s==='available'||s==='scanning')?left((c.expiresAt||c.createdAt+864e5)-Date.now()):'—';
-  return `<tr class="r ${c.done?'go':''}" ${c.done?`onclick="openCheck('${esc(c.code)}')"`:''}><td>${digits(c.code,1)}</td><td><span class="pill ${tn}"><i class="dot"></i>${tl}</span></td><td>${c.done?'<span class="pill off">Ouvrir ↗</span>':'<span class="mut">—</span>'}</td><td class="game">FiveM</td><td>${ex}</td><td>${det(c)}</td><td>${c.player?esc(c.player):'<span class="mut"><i>Sans nom</i></span>'}</td><td class="rel">${ago(c.createdAt)}</td></tr>`}).join('')
+  return `<tr class="r ${c.done?'go':''}" ${c.done?`role="button" tabindex="0" aria-label="Ouvrir le rapport de ${esc(c.player||c.code)}" onclick="openCheck('${esc(c.code)}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openCheck('${esc(c.code)}')}"`:''}><td>${digits(c.code,1)}</td><td><span class="pill ${tn}"><i class="dot"></i>${tl}</span></td><td>${c.done?'<span class="pill off">Ouvrir ↗</span>':'<span class="mut">—</span>'}</td><td class="game">FiveM</td><td>${ex}</td><td>${det(c)}</td><td>${c.player?esc(c.player):'<span class="mut"><i>Sans nom</i></span>'}</td><td class="rel">${ago(c.createdAt)}</td></tr>`}).join('')
   ||`<tr><td colspan="8" class="empty">${ALL.length?'Aucun résultat pour ce filtre.':'Aucun code pour le moment. Cliquez sur « Générer un code ».'}</td></tr>`}
 async function refresh(force){const j=await api('/owner/checks');if(j.http===401||j.http===403){boot();return}
  if(j.http!==200||!Array.isArray(j.checks)){toast('Impossible de charger les rapports. Réessayez.');return}
@@ -189,7 +196,8 @@ async function openCheck(code){openCode=code;sevF='all';txtQ='';$('drawer').clas
  $('drawer').innerHTML='<div class="sk" style="height:34px;width:60%"></div><div class="sk" style="height:120px"></div><div class="sk"></div><div class="sk"></div>';
  const j=await api('/owner/check/'+code);CUR={code,j};drawerView()}
 const fxr=value=>{const f=value&&typeof value==='object'?value:{},s=['high','medium','info'].includes(f.severity)?f.severity:'info';const type=String(f.fileType||'OTHER').toUpperCase();return `<div class="f ${s}"><span class="pill ${s==='high'?'bad':s==='medium'?'warn':'wait'}">${esc(type)}</span> ${esc(f.reason||f.category)}<details><summary>Détail technique</summary><code>${esc(f.detail)}</code><button class="btn ghost sm cp" onclick="copy(this.previousElementSibling.textContent,'Détail copié')">Copier</button></details></div>`};
-function verdictOf(r){const st=r.stats&&typeof r.stats==='object'&&!Array.isArray(r.stats)?r.stats:{},ch=Array.isArray(r.cheats)?r.cheats:[];return {st,ch,vk:ch.length||st.high?'bad':st.medium?'warn':'ok',vt:ch.length?'Cheat détecté : '+ch.join(', '):st.high?'Éléments très suspects':st.medium?'Aucun cheat connu, éléments à vérifier':'Aucun cheat connu détecté'}}
+function verdictOf(r){const st=r.stats&&typeof r.stats==='object'&&!Array.isArray(r.stats)?r.stats:{},ch=Array.isArray(r.cheats)?r.cheats:[],ds=r.defenderScan&&Number(r.defenderScan.detections)>0;return {st,ch,vk:ch.length||st.high?'bad':st.medium?'warn':'ok',vt:ch.length?'Cheat détecté : '+ch.join(', '):ds?'Menace détectée par Microsoft Defender — vérifier dans Sécurité Windows':st.high?'Éléments très suspects':st.medium?'Aucun cheat connu, éléments à vérifier':'Aucun cheat connu détecté'}}
+function defenderExplanation(r){const d=r.defenderScan&&typeof r.defenderScan==='object'?r.defenderScan:{},count=Number(d.detections)||0;if(!count)return '';const items=(Array.isArray(r.findings)?r.findings:[]).filter(f=>f&&f.category==='Menace détectée par Microsoft Defender');return `<section class="cat"><h3 class="gh">Comprendre l’alerte Microsoft Defender (${count})</h3><p>Defender a enregistré une détection pendant la période du scan. Cela indique un risque de sécurité à vérifier, mais ne prouve pas une triche et ne signifie pas forcément que le scan a déclenché la détection. Le rapport ne peut pas confirmer si la menace est encore présente.</p><ol><li>Ouvrez <b>Sécurité Windows → Protection contre les virus et menaces → Historique de protection</b>.</li><li>Recherchez le nom et l’heure indiqués ci-dessous ; vérifiez le fichier concerné, l’action et son état actuel.</li><li>Si l’action n’a pas réussi, si l’état n’est pas clair ou si le fichier est toujours présent, mettez à jour les définitions et lancez une analyse personnalisée ou hors ligne avec Microsoft Defender.</li><li>Ne restaurez pas et ne supprimez pas un fichier sur la seule base du rapport. Si vous pensez qu’il s’agit d’un faux positif, vérifiez sa provenance et demandez une seconde analyse fiable.</li></ol><p>Les éléments ci-dessous proviennent de l’historique Defender disponible pendant le scan ; ils peuvent inclure une détection antérieure récemment enregistrée. Une menace détectée n’est pas automatiquement un cheat.</p>${items.map(f=>`<details><summary>${esc(f.reason||f.category)}</summary><code>${esc(f.detail)}</code></details>`).join('')}</section>`}
 function summaryText(){const {code,j}=CUR,r=j.report;if(!r)return '';const v=verdictOf(r),F=Array.isArray(r.findings)?r.findings:[];
  const top=F.filter(f=>f&&f.severity==='high').slice(0,8).map(f=>'• '+(f.reason||f.category)+' ('+f.detail+')').join('\n');
  return `Joueur : ${j.player||'Sans nom'} (code ${code})\nPC : ${r.hostname||'—'} · ${r.os||''}\nVerdict : ${v.vt}\nIndice clean : ${typeof v.st.clean==='number'?v.st.clean+' %':'—'}\nCritiques : ${v.st.high||0} · À vérifier : ${v.st.medium||0}`+(top?'\n\n'+top:'')}
@@ -201,7 +209,7 @@ function drawerView(){const {code,j}=CUR;
  const meta=`<dl class="meta"><dt>PC</dt><dd>${esc(r.hostname)}</dd><dt>Système</dt><dd>${esc(r.os||'—')}</dd><dt>Analyse</dt><dd>${esc(new Date(r.scannedAt).toLocaleString())}</dd><dt>Fichiers</dt><dd>${esc(st.files??'—')} analysés · ${esc(st.processes??'—')} processus</dd><dt>HWID</dt><dd>${esc(r.hwid)} <button class="btn ghost sm" style="padding:2px 8px" data-copy-value="${esc(r.hwid)}" onclick="copy(this.dataset.copyValue,'HWID copié')">Copier</button></dd></dl>`;
  const F=Array.isArray(r.findings)?r.findings:[],n={high:0,medium:0,info:0};F.forEach(f=>{const s=f&&['high','medium','info'].includes(f.severity)?f.severity:'info';n[s]++});
  const SF=[['all','Tout',F.length],['high','Critique',n.high],['medium','À vérifier',n.medium],['info','Info',n.info]];
- $('drawer').innerHTML=head+`<div class="verdict ${vk}">${has?donut(st.clean,96):''}<div><b>${esc(vt)}</b><span>${esc(vs)}</span></div></div>`+(has?'<p class="note">L\'indice clean est indicatif : ce n\'est pas une preuve. La décision finale appartient au staff.</p>':'')+meta+
+ $('drawer').innerHTML=head+`<div class="verdict tilt-card ${vk}">${has?donut(st.clean,96):''}<div><b>${esc(vt)}</b><span>${esc(vs)}</span></div></div>`+(has?'<p class="note">L\'indice clean est indicatif : ce n\'est pas une preuve. La décision finale appartient au staff.</p>':'')+defenderExplanation(r)+meta+
   `<div class="fbar">${SF.map(([k,t,v])=>`<button class="chip ${sevF===k?'on':''}" onclick="sevF='${k}';drawerView()">${t}<em>${v}</em></button>`).join('')}<input id="fq" placeholder="Filtrer…" value="${esc(txtQ)}" oninput="txtQ=this.value.toLowerCase();renderF()"></div><div id="fl"></div>`;
  renderF();setTimeout(()=>document.querySelectorAll('#drawer .arc').forEach(a=>a.style.strokeDashoffset=a.dataset.t),80)}
 function renderF(){const r=CUR.j.report,F=(Array.isArray(r.findings)?r.findings:[]).filter(value=>{const f=value&&typeof value==='object'?value:{},s=['high','medium','info'].includes(f.severity)?f.severity:'info';return (sevF==='all'||s===sevF)&&(!txtQ||(String(f.reason||'')+' '+String(f.detail||'')+' '+String(f.category||'')).toLowerCase().includes(txtQ))});
@@ -212,5 +220,23 @@ function renderF(){const r=CUR.j.report,F=(Array.isArray(r.findings)?r.findings:
 async function del(code){if(!confirm('Supprimer définitivement ce rapport ?'))return;await api('/owner/check/delete',{method:'POST',body:JSON.stringify({code})});closeD();refresh()}
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeD();closeNew()}else if(e.key==='/'&&!/INPUT|TEXTAREA/.test(document.activeElement.tagName)&&$('q')){e.preventDefault();$('q').focus()}});
 window.addEventListener('focus',()=>{document.title='Dashboard — Blue Detected'});
+if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+ document.addEventListener('pointermove',e=>{
+  if(e.pointerType!=='mouse')return;
+  const card=e.target.closest('.tilt-card');
+  if(!card)return;
+  const rect=card.getBoundingClientRect(),x=(e.clientX-rect.left)/rect.width,y=(e.clientY-rect.top)/rect.height;
+  card.style.setProperty('--rx',`${(0.5-y)*5}deg`);
+  card.style.setProperty('--ry',`${(x-0.5)*5}deg`);
+  card.style.setProperty('--mx',`${x*100}%`);
+  card.style.setProperty('--my',`${y*100}%`);
+  card.classList.add('is-tilting');
+ });
+ document.addEventListener('pointerout',e=>{
+  const card=e.target.closest('.tilt-card');
+  if(!card||e.relatedTarget&&card.contains(e.relatedTarget))return;
+  card.style.setProperty('--rx','0deg');card.style.setProperty('--ry','0deg');card.classList.remove('is-tilting');
+ });
+}
 boot();
-</script></body></html>
+</script><script src="/language.js"></script></body></html>

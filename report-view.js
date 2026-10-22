@@ -23,6 +23,7 @@ function summarizeReport(report) {
     scannedAt: text(source.scannedAt),
     defenderStatus: text(defender.status),
     defenderDetections: text(defender.detections, '0'),
+    defenderDetectionWindowNote: text(defender.detectionWindowNote),
     signatureAgeDays: text(protection.signatureAgeDays),
     realTimeProtection: text(protection.realTimeProtectionEnabled),
     tamperProtection: text(protection.tamperProtectionEnabled),
@@ -36,6 +37,12 @@ function summarizeReport(report) {
       category: text(finding && finding.category),
       reason: text(finding && finding.reason),
       detail: text(finding && finding.detail)
+    })),
+    defenderFindings: findings.filter((finding) =>
+      finding && finding.category === 'Menace détectée par Microsoft Defender'
+    ).map((finding) => ({
+      reason: text(finding.reason),
+      detail: text(finding.detail)
     }))
   };
 }

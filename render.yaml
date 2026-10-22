@@ -1,0 +1,66 @@
+services:
+  # Public website + seller API + scan report API (MongoDB-backed)
+  - type: web
+    name: blue-detected-site
+    runtime: node
+    plan: starter
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: TRUST_PROXY
+        value: "1"
+      - key: ADMIN_TOKEN
+        generateValue: true
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: MONGODB_URI
+        sync: false
+      - key: MONGODB_DATABASE
+        value: pccheck
+      - key: BASE_URL
+        sync: false
+      - key: DISCORD_CLIENT_ID
+        sync: false
+      - key: DISCORD_CLIENT_SECRET
+        sync: false
+      - key: RETENTION_DAYS
+        value: "30"
+      - key: MAX_ACTIVE_CODES
+        value: "3"
+      - key: DOWNLOAD_URL
+        sync: false
+      - key: CONTACT_EMAIL
+        sync: false
+
+  # Optional separate owner/admin report panel (PostgreSQL-backed)
+  - type: web
+    name: blue-detected-owner-reports
+    runtime: node
+    plan: starter
+    buildCommand: npm ci
+    startCommand: npm run start:owners
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: TRUST_PROXY
+        value: "1"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: blue-detected-postgres
+          property: connectionString
+      - key: OWNER_PASSWORD
+        sync: false
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: KEY_PEPPER
+        generateValue: true
+
+databases:
+  - name: blue-detected-postgres
+    databaseName: pccheck_owner
+    user: blue_detected_owner
+    plan: basic-256mb

@@ -130,12 +130,6 @@ const app = express();
 app.disable('x-powered-by');
 app.use(helmet({ contentSecurityPolicy: false }));
 applyTrafficProtection(app, ['/auth', '/owner', '/seller', '/validate-code', '/submit']);
-app.use((req, res, next) => {
-  if (req.path.startsWith('/owner') || req.path.startsWith('/seller')) {
-    res.setHeader('Cache-Control', 'no-store');
-  }
-  next();
-});
 app.use(express.json({ limit: '1mb' }));
 const sellerLimit = positiveIntegerFromEnv('SELLER_RATE_LIMIT_PER_10_MINUTES', 40);
 const sellerLimiter = rateLimit({
@@ -450,7 +444,6 @@ app.get('/logo.png', page('logo.png'));
 app.get('/', (_, r) => r.type('html').send(fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8').split('{{INVITE}}').join(INVITE)));
 app.get('/dashboard', page('dashboard.html'));
 app.get('/style.css', page('style.css'));
-app.get('/language.js', page('language.js'));
 app.get('/discord.svg', page('discord.svg'));
 app.get('/seller', page('seller.html'));
 

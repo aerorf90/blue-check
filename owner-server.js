@@ -120,7 +120,7 @@ function page(title, content) {
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escapeHtml(title)} · Blue Detected</title>
 <style>
 body{font:16px system-ui,sans-serif;background:#0b1020;color:#e8eefb;margin:0}main{max-width:1100px;margin:36px auto;padding:24px}a{color:#8db8ff}section,article{background:#141c30;border:1px solid #2b3855;border-radius:10px;padding:18px;margin:16px 0}input,select,button{font:inherit;border:1px solid #405171;border-radius:6px;padding:9px;margin:4px;background:#0b1020;color:#e8eefb}button{background:#2459b4;cursor:pointer}table{border-collapse:collapse;width:100%;margin-top:12px}th,td{text-align:left;border-bottom:1px solid #2b3855;padding:9px;vertical-align:top;overflow-wrap:anywhere}pre{white-space:pre-wrap;overflow-wrap:anywhere}nav{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:20px}.muted{color:#a6b3ca}.error{color:#ff9a9a}.new-code{font-size:2rem;letter-spacing:.3rem;color:#94ffca}.pagination{display:flex;justify-content:space-between;gap:12px;margin:18px 0}
-</style></head><body><main><nav><a href="/">Blue Detected</a><a href="/privacy">Privacy</a></nav><h1>${escapeHtml(title)}</h1>${content}</main><script src="/language.js"></script></body></html>`;
+</style></head><body><main><nav><a href="/">Blue Detected</a><a href="/privacy">Privacy</a></nav><h1>${escapeHtml(title)}</h1>${content}</main></body></html>`;
 }
 
 function loginPage(action, csrfCookieName, csrfToken, message = '') {
@@ -178,49 +178,15 @@ function buildOwnerDashboard(session, account, keys, reports, pagination, query)
 function buildReportPage(title, report, session, deleteAction) {
   const summary = summarizeReport(report);
   const rows = Object.entries(summary).filter(([key]) => key !== 'findings')
-    .filter(([key]) => key !== 'defenderFindings')
     .map(([key, value]) => `<tr><th>${escapeHtml(key)}</th><td>${escapeHtml(value)}</td></tr>`).join('');
   const findings = summary.findings.map((finding) => `<li><strong>${escapeHtml(finding.severity)} · ${escapeHtml(finding.category)}</strong>: ${escapeHtml(finding.reason)} ${escapeHtml(finding.detail)}</li>`).join('');
-  const defenderGuide = Number(summary.defenderDetections) > 0
-    ? `<section><h2>Understanding Microsoft Defender detections</h2>
-<p>A Defender detection indicates a security concern to review. It does not by itself prove cheating, and a detection recorded during the scan window does not prove that the scan caused it. The report cannot confirm whether the item is still present.</p>
-<ol><li>Open Windows Security → Virus &amp; threat protection → Protection history.</li>
-<li>Match the threat name, affected resource and time, then check the current status and action taken.</li>
-<li>If action success is false or unclear, update Defender security intelligence and run a custom or offline scan.</li>
-<li>Do not restore or delete a file based only on this report. Verify its source and seek a second trusted scan if you suspect a false positive.</li></ol>
-<p>These results are taken from Defender history available during the scan. They can include detections that are not related to the game.</p>
-<ul>${summary.defenderFindings.map((finding) => `<li><strong>${escapeHtml(finding.reason)}</strong>: ${escapeHtml(finding.detail)}</li>`).join('')}</ul></section>`
-    : '';
-  const dashboardPath = session.role === 'account' ? '/owner' : '/admin';
-  return page(title, `<p><a href="${dashboardPath}">Back to dashboard</a></p><section><h2>Summary</h2><table>${rows}</table><h3>Findings</h3><ul>${findings || '<li>No findings recorded.</li>'}</ul></section>${defenderGuide}<section><h2>Raw report</h2><pre>${escapeHtml(JSON.stringify(report, null, 2))}</pre></section>${deleteAction ? `<section><h2>Delete report</h2><p>Deletion is permanent; it does not restore the consumed one-time code.</p><form method="post" action="${deleteAction}">${csrfInput(session)}<button>Delete report permanently</button></form></section>` : ''}`);
+  return page(title, `<p><a href="javascript:history.back()">Back to dashboard</a></p><section><h2>Summary</h2><table>${rows}</table><h3>Findings</h3><ul>${findings || '<li>No findings recorded.</li>'}</ul><h3>Raw report</h3><pre>${escapeHtml(JSON.stringify(report, null, 2))}</pre></section>${deleteAction ? `<section><h2>Delete report</h2><p>Deletion is permanent; it does not restore the consumed one-time code.</p><form method="post" action="${deleteAction}">${csrfInput(session)}<button>Delete report permanently</button></form></section>` : ''}`);
 }
 
 function createApp() {
   const app = express();
   app.disable('x-powered-by');
-  app.use(helmet({
-    contentSecurityPolicy: {
-      directives: {
-        defaultSrc: ["'self'"],
-        baseUri: ["'self'"],
-        connectSrc: ["'self'"],
-        fontSrc: ["'self'"],
-        formAction: ["'self'"],
-        frameAncestors: ["'none'"],
-        imgSrc: ["'self'", 'data:'],
-        objectSrc: ["'none'"],
-        scriptSrc: ["'self'"],
-        scriptSrcAttr: ["'none'"],
-        styleSrc: ["'self'", "'unsafe-inline'"]
-      }
-    }
-  }));
-  app.use((req, res, next) => {
-    if (req.path.startsWith('/admin') || req.path.startsWith('/owner')) {
-      res.setHeader('Cache-Control', 'no-store');
-    }
-    next();
-  });
+  app.use(helmet({ contentSecurityPolicy: false }));
   applyTrafficProtection(app, ['/admin', '/owner', '/validate-code', '/submit']);
   app.use(express.urlencoded({ extended: false, limit: '16kb' }));
   app.use(express.json({ limit: '1mb' }));
@@ -262,9 +228,6 @@ function createApp() {
       ? 'The local demo uses temporary in-memory storage. Data is lost when its process stops.'
       : 'Reports are stored in the configured PostgreSQL database.';
     res.type('html').send(fs.readFileSync(filename, 'utf8').replace('{{STORAGE}}', storage));
-  });
-  app.get('/language.js', (_req, res) => {
-    res.sendFile(path.join(__dirname, 'language.js'));
   });
 
   app.get('/admin/login', (req, res) => {

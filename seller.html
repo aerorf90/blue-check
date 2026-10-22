@@ -39,4 +39,4 @@ async function act(action){return run(async()=>{
  const data=await request('/seller/'+action,{method:'POST',body:JSON.stringify({key})});
  return data.ok?'Opération terminée.':data.error||'Le serveur a refusé la requête.';
 })}
-</script><script src="/language.js"></script></body></html>
+</script></body></html>

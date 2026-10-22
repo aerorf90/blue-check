@@ -22,9 +22,6 @@ Both services implement `/validate-code` and `/submit`, but they use separate da
 - In non-production development only, the service can use an atomic local JSON file (`DATA_FILE` or `server/data.json`). Corrupt data causes a visible startup error instead of silently resetting the database.
 - `DOWNLOAD_URL` is optional. If it is not set, `/download/file` returns 404 with an explicit setup message; no fake download is served.
 - `CONTACT_EMAIL` and `DISCORD_INVITE` are optional. Missing values are not replaced with fictitious contact details or invite links.
-- Responses from authenticated `/owner` and `/seller` routes are marked `Cache-Control: no-store` to reduce persistence of private account and report data in browser or proxy caches.
-- The public website, dashboard, download, seller, terms, and privacy pages include an English/Arabic language switcher. The choice is saved in the browser; Arabic pages use right-to-left layout.
-- The isolated PostgreSQL owner service’s privacy notice and owner/admin dashboards share the English/Arabic switcher.
 
 ### Run the website locally
 
@@ -51,8 +48,6 @@ node -e "console.log(require('node:crypto').randomBytes(32).toString('base64url'
 
 Run the service with `npm run start:owners`. It uses PostgreSQL with TLS certificate verification in production. `DATABASE_SSL_CA` can provide a private CA certificate.
 
-The owner panel sends a restrictive Content Security Policy: scripts and form submissions are limited to the same origin, framing and plugin content are blocked, and account/report pages are marked `no-store`. These browser-side defenses reduce impact from injected content and shared-browser caching, but do not replace keeping dependencies, database credentials, hosting configuration, and administrator passwords secure.
-
 For an isolated local owner-panel demo without PostgreSQL, run `npm run start:local`. It binds only to `127.0.0.1:3187`, uses temporary in-memory storage and a public demo administrator password, and never sends reports to a hosted service. Do not use demo credentials in production. The client for this demo is built separately with `build-local.bat`; its embedded server address is `server.local.txt`.
 
 Run `npm test` to exercise the local owner-account workflow, key issuance, report upload, owner isolation, and deletion.
@@ -60,8 +55,3 @@ Run `npm test` to exercise the local owner-account workflow, key issuance, repor
 ## Deployment
 
 The root `render.yaml` describes separate website and PostgreSQL owner-panel services. Provision MongoDB and PostgreSQL independently, enter all secret values in Render, and verify each `/health` endpoint before changing the desktop client's `server.txt`. No cloud account, database, credentials, or production deployment is created by this repository change.
-
-
-## Desktop client compatibility fix
-
-The `desktop-client/` folder contains the Windows Forms client source updated to accept the website service key format `PCK-XXXX-XXXX-XXXX` (three hexadecimal groups), matching keys created by `/seller/create`. To rebuild, run `desktop-client/build.bat` on Windows 10/11. The archive does not include a newly tested executable; test launch, code validation, Defender scan, and report submission against the deployed service after rebuilding.

@@ -241,7 +241,7 @@ const scanLimiter = rateLimit({
   message: { error: 'Scan request limit reached. Please try again later.' }
 });
 app.get('/auth/discord', oauthLimiter, (req, res) => {
-  if (!DC_ID || !DC_SECRET) return res.status(503).send('Connexion Discord non configurée (DISCORD_CLIENT_ID / DISCORD_CLIENT_SECRET).');
+  if (!DC_ID || !DC_SECRET) return res.status(503).send('Discord sign-in is not configured (DISCORD_CLIENT_ID / DISCORD_CLIENT_SECRET).');
   const state = crypto.randomBytes(16).toString('hex');
   res.setHeader('Set-Cookie', cookie('ost', state, 600));
   res.redirect('https://discord.com/oauth2/authorize?' + new URLSearchParams({ client_id: DC_ID, response_type: 'code',
@@ -249,19 +249,19 @@ app.get('/auth/discord', oauthLimiter, (req, res) => {
 });
 app.get('/auth/discord/callback', oauthLimiter, async (req, res) => {
   if (!DC_ID || !DC_SECRET) {
-    return res.status(503).send('Connexion Discord non configurée (DISCORD_CLIENT_ID / DISCORD_CLIENT_SECRET).');
+    return res.status(503).send('Discord sign-in is not configured (DISCORD_CLIENT_ID / DISCORD_CLIENT_SECRET).');
   }
   try {
     const state = typeof req.query.state === 'string' ? req.query.state : '';
     const stateCookie = parseCookies(req).ost || '';
     if (typeof req.query.code !== 'string' || !state || !stateCookie) {
-      return res.status(400).send('Connexion refusée. <a href="/">Retour</a>');
+      return res.status(400).send('Sign-in denied. <a href="/">Retour</a>');
     }
     const stateMatches = crypto.timingSafeEqual(
       crypto.createHash('sha256').update(state).digest(),
       crypto.createHash('sha256').update(stateCookie).digest()
     );
-    if (!stateMatches) return res.status(400).send('Connexion refusée. <a href="/">Retour</a>');
+    if (!stateMatches) return res.status(400).send('Sign-in denied. <a href="/">Retour</a>');
     const tr = await fetch('https://discord.com/api/oauth2/token', { method: 'POST', signal: AbortSignal.timeout(10000), headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: new URLSearchParams({ client_id: DC_ID, client_secret: DC_SECRET, grant_type: 'authorization_code', code: String(req.query.code), redirect_uri: baseUrl(req) + '/auth/discord/callback' }) });
     if (!tr.ok) throw new Error(`Discord token endpoint returned HTTP ${tr.status}.`);
@@ -281,7 +281,7 @@ app.get('/auth/discord/callback', oauthLimiter, async (req, res) => {
     res.redirect('/dashboard');
   } catch (error) {
     console.error('Discord OAuth callback failed:', error.message);
-    res.status(502).send('Connexion Discord indisponible. Réessayez plus tard.');
+    res.status(502).send('Discord sign-in is unavailable. Please try again later.');
   }
 });
 app.post('/auth/logout', (req, res) => {
@@ -298,7 +298,7 @@ app.post('/auth/logout', (req, res) => {
 // ---------- Propriétaire de serveur (compte Discord + clé) ----------
 function userAuth(req, res, next) {
   const id = readSession(req), db = load(), u = id && db.users[id];
-  if (!u) return res.status(401).json({ error: 'Non connecté' });
+  if (!u) return res.status(401).json({ error: 'Not signed in' });
   req.user = u; req.db = db; next();
 }
 function keyState(db, u) {
@@ -311,7 +311,7 @@ function keyState(db, u) {
 function ownerAuth(req, res, next) {
   userAuth(req, res, () => {
     const s = keyState(req.db, req.user);
-    if (s.status !== 'ok') return res.status(403).json({ error: { none: 'Aucune clé active', expired: 'Clé expirée', revoked: 'Clé désactivée' }[s.status], status: s.status });
+    if (s.status !== 'ok') return res.status(403).json({ error: { none: 'No active key', expired: 'Key expired', revoked: 'Key disabled' }[s.status], status: s.status });
     req.k = s.k; next();
   });
 }
@@ -325,10 +325,10 @@ app.post('/owner/activate', scanLimiter, userAuth, async (req, res, next) => {
       const user = db.users[req.user.id];
       const key = String((req.body || {}).key || '').trim().toUpperCase();
       const item = db.keys[key];
-      if (!item) return { ok: false, error: 'Clé invalide' };
-      if (item.revoked) return { ok: false, error: 'Clé désactivée' };
+      if (!item) return { ok: false, error: 'Key invalide' };
+      if (item.revoked) return { ok: false, error: 'Key disabled' };
       if (item.owner && item.owner !== user.id) return { ok: false, error: 'Cette clé est déjà liée à un autre compte Discord' };
-      if (keyState(db, user).status === 'ok' && user.key !== key) return { ok: false, error: 'Vous avez déjà une clé active' };
+      if (keyState(db, user).status === 'ok' && user.key !== key) return { ok: false, error: 'You already have an active key' };
       if (!item.owner) item.owner = user.id;
       if (!item.expiresAt) item.expiresAt = Date.now() + item.days * DAY;
       user.key = key;
@@ -388,10 +388,10 @@ function codeError(db, code) {
   if (!/^\d{6}$/.test(code)) return 'Code invalide';
   const c = db.checks[code];
   if (!c) return 'Code invalide';
-  if (c.report) return 'Ce code a déjà été utilisé';
+  if (c.report) return 'This code has already been used';
   if (Date.now() - c.createdAt > CODE_TTL) return 'Code expiré';
   const k = db.keys[c.key];
-  if (!k || k.revoked || !k.expiresAt || Date.now() > k.expiresAt) return 'Abonnement du serveur expiré';
+  if (!k || k.revoked || !k.expiresAt || Date.now() > k.expiresAt) return 'Subscription du serveur expiré';
   return null;
 }
 app.post('/validate-code', scanLimiter, async (req, res, next) => {
@@ -419,7 +419,7 @@ app.post('/submit', scanLimiter, async (req, res, next) => {
       if (check && check.report) {
         return JSON.stringify(check.report) === JSON.stringify(report)
           ? { ok: true, duplicate: true }
-          : { ok: false, error: 'Ce code a déjà été utilisé' };
+          : { ok: false, error: 'This code has already been used' };
       }
       const error = codeError(db, code);
       if (error) return { ok: false, error };
@@ -433,7 +433,7 @@ app.post('/submit', scanLimiter, async (req, res, next) => {
 // ---------- Pages ----------
 const page = (f) => (_, r) => r.sendFile(path.join(__dirname, f));
 const legal = (f) => (_, r) => {
-  const contact = CONTACT ? `<a href="mailto:${CONTACT}">${CONTACT}</a>` : 'Coordonnées de contact non configurées.';
+  const contact = CONTACT ? `<a href="mailto:${CONTACT}">${CONTACT}</a>` : 'Contact details are not configured.';
   const html = fs.readFileSync(path.join(__dirname, f), 'utf8')
     .replace(/<a href="mailto:\{\{CONTACT\}\}">\{\{CONTACT\}\}<\/a>/g, contact)
     .split('{{DAYS}}').join(String(RETENTION / DAY));

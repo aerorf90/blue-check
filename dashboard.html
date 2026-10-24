@@ -1,8 +1,7 @@
-<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dashboard — Blue Detected</title>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dashboard — Blue Detected</title>
 <link rel="icon" href="/logo.png"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0a0508;--bg2:#12070d;--panel:rgba(255,255,255,.035);--panel2:rgba(255,255,255,.06);--line:rgba(255,80,130,.2);--acc:#ff3d78;--acc2:#c2185b;--accsoft:rgba(255,61,120,.14);--t:#f6eef1;--mut:#a8909a;--ok:#3ee79a;--warn:#ffc15a;--bad:#ff5a7a;--cyan:#5fd8ff;--drawer:#14070d;--glow:rgba(255,61,120,.16)}
-body[data-theme="blue"]{--bg:#050b1c;--bg2:#08122b;--panel:rgba(255,255,255,.035);--panel2:rgba(255,255,255,.06);--line:rgba(90,150,255,.25);--acc:#2f7bff;--acc2:#1b5ff0;--accsoft:rgba(47,123,255,.16);--t:#eef4ff;--mut:#93a8d2;--bad:#ff6b6b;--drawer:#081437;--glow:rgba(47,123,255,.18)}
+:root{--bg:#050b1c;--bg2:#08122b;--panel:rgba(255,255,255,.035);--panel2:rgba(255,255,255,.06);--line:rgba(90,150,255,.25);--acc:#2f7bff;--acc2:#1b5ff0;--accsoft:rgba(47,123,255,.16);--t:#eef4ff;--mut:#93a8d2;--ok:#3ee79a;--warn:#ffc15a;--bad:#ff6b6b;--cyan:#5fd8ff;--drawer:#081437;--glow:rgba(47,123,255,.18)}
 *{box-sizing:border-box;margin:0}
 html{background:var(--bg)}
 body{font-family:"Segoe UI",system-ui,-apple-system,sans-serif;color:var(--t);line-height:1.5;min-height:100vh;-webkit-font-smoothing:antialiased;background:radial-gradient(900px 500px at 70% -10%,var(--glow),transparent 60%),radial-gradient(700px 500px at 0% 100%,var(--glow),transparent 60%),var(--bg);background-attachment:fixed}
@@ -34,8 +33,6 @@ input{background:rgba(255,255,255,.05);border:1px solid var(--line);border-radiu
 .shell{display:grid;grid-template-columns:230px 1fr;min-height:100vh}
 .side{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;gap:6px;padding:18px 14px;background:rgba(0,0,0,.28);border-right:1px solid var(--line)}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--t);padding:4px 6px 10px}.brand img{height:30px}.brand b{display:block;font:700 15px "Sora",sans-serif;color:var(--acc)}.brand small{display:block;font-size:10.5px;color:var(--mut)}
-.theme{display:flex;align-items:center;gap:10px;width:100%;padding:10px 12px;margin-bottom:10px;border-radius:10px;background:var(--accsoft);border:1px solid var(--line);color:var(--t);font:600 12px "Segoe UI",sans-serif;cursor:pointer;text-align:left}
-.theme small{display:block;font-weight:500;color:var(--mut);font-size:10.5px;letter-spacing:.06em}
 .nl{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:9px;color:var(--mut);text-decoration:none;font-size:13.5px;border:1px solid transparent}
 .nl:hover{background:var(--panel2);color:var(--t)}.nl.on{color:var(--t);background:var(--accsoft);border-color:var(--line)}
 .sp{flex:1}
@@ -88,128 +85,153 @@ td{padding:11px 14px;border-top:1px solid var(--line);white-space:nowrap}tr.r:ho
 .rel{font-size:12px;color:var(--mut)}
 #toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--drawer);border:1px solid var(--acc);padding:10px 18px;border-radius:10px;font-size:14px;z-index:60}
 @media(max-width:900px){.shell{grid-template-columns:1fr}.side{position:static;height:auto;flex-direction:row;flex-wrap:wrap;align-items:center}.side .sp{display:none}.theme{width:auto}.main{padding:20px 16px 40px}.cards{grid-template-columns:repeat(2,1fr)}.tools input{width:100%}}
+
+/* BLUE DETECTED — signature dashboard redesign */
+:root{--bg:#050914;--bg2:#0a1427;--panel:#0a1426;--panel2:#101f38;--line:rgba(91,151,255,.18);--acc:#3988ff;--acc2:#1262e8;--accsoft:rgba(43,123,255,.13);--t:#edf5ff;--mut:#8ea6c8;--ok:#43d9a2;--warn:#ffc15c;--bad:#ff647c;--cyan:#5edbff;--drawer:#091326;--glow:rgba(23,102,237,.15)}
+body{background:radial-gradient(ellipse at 86% 0%,rgba(24,91,195,.17),transparent 34%),linear-gradient(150deg,#050914 0%,#071326 52%,#050914 100%);background-attachment:fixed}
+.shell{grid-template-columns:248px minmax(0,1fr);gap:0;max-width:1680px;margin:0 auto;min-height:100vh}
+.side{padding:24px 16px 18px;background:linear-gradient(180deg,rgba(10,24,48,.96),rgba(5,13,28,.96));border-right:1px solid rgba(82,145,255,.2);box-shadow:12px 0 38px rgba(0,0,0,.12)}
+.brand{padding:8px 10px 23px;margin-bottom:14px;border-bottom:1px solid var(--line);gap:12px}.brand img{height:38px;width:38px;object-fit:contain}.brand b{font-size:16px;letter-spacing:-.04em}.brand small{font-size:10px;letter-spacing:.08em;text-transform:uppercase;margin-top:3px}
+.nl{padding:12px 13px;border-radius:11px;font-size:13px;margin:2px 0;transition:all .18s ease}.nl:hover{transform:translateX(2px);background:rgba(66,136,255,.09)}.nl.on{background:linear-gradient(100deg,rgba(44,126,255,.22),rgba(44,126,255,.06));border-color:rgba(68,145,255,.32);box-shadow:inset 3px 0 0 var(--acc);color:#fff}
+.me{margin-top:12px;padding:12px;background:rgba(14,31,57,.86);border-color:rgba(91,151,255,.15);border-radius:13px}.me img{width:38px;height:38px;border:2px solid rgba(70,143,255,.5)}
+.main{max-width:none;padding:34px clamp(18px,3vw,48px) 54px}
+.hd{align-items:flex-start;padding:25px 26px;margin-bottom:20px;border:1px solid rgba(86,147,255,.2);border-radius:18px;background:linear-gradient(115deg,rgba(14,34,67,.88),rgba(8,19,38,.8));box-shadow:0 18px 55px rgba(0,0,0,.14);position:relative;overflow:hidden}
+.hd:after{content:"";position:absolute;right:-54px;top:-95px;width:230px;height:230px;border:1px solid rgba(61,137,255,.15);border-radius:50%;box-shadow:0 0 0 24px rgba(61,137,255,.025),0 0 0 52px rgba(61,137,255,.02);pointer-events:none}
+.eyebrow{font-size:10px;letter-spacing:.2em;color:#65b8ff}.hd h1{font-size:clamp(25px,2.2vw,34px);margin:8px 0 7px}.hd p{font-size:13px;max-width:480px}.tools{position:relative;z-index:1}.tools input{width:230px;min-height:38px;background:#071326;border-color:rgba(92,151,255,.25)}.cap{background:rgba(4,12,25,.45);border-radius:10px;padding:10px 12px;font-size:10px;letter-spacing:.03em}
+.btn{border-radius:10px;background:linear-gradient(135deg,#398bff,#155de1);box-shadow:0 7px 22px rgba(31,104,237,.2)}.btn.ghost{background:rgba(255,255,255,.035);border-color:rgba(92,151,255,.23)}.btn.ghost:hover{background:rgba(50,126,255,.13)}
+.cards{gap:14px;margin-bottom:20px}.card{min-height:112px;padding:19px 20px 16px;border-radius:15px;background:linear-gradient(145deg,rgba(15,31,56,.96),rgba(8,18,35,.94));border-color:rgba(91,151,255,.16);box-shadow:0 10px 28px rgba(0,0,0,.12);transition:transform .18s,border-color .18s}.card:hover{transform:translateY(-2px);border-color:rgba(91,151,255,.38)}.card:before{left:20px;top:0;width:44px;height:3px;border-radius:0 0 4px 4px}.card span{font-size:10px;letter-spacing:.12em}.card b{font-size:29px;margin-top:10px}
+.chips{gap:9px;margin:0 0 18px}.chip{border-radius:10px;padding:8px 13px;background:rgba(10,24,45,.72);border-color:rgba(91,151,255,.17)}.chip.on{background:rgba(43,123,255,.17);box-shadow:inset 0 0 0 1px rgba(57,136,255,.15)}
+.active{border-radius:15px;padding:19px 21px;background:linear-gradient(105deg,rgba(25,81,161,.2),rgba(11,27,50,.88));border-color:rgba(65,140,255,.27);box-shadow:inset 0 1px rgba(255,255,255,.025)}.d{width:34px;height:38px;border-radius:9px;background:#071326;border-color:rgba(91,151,255,.25)}
+.tw{border-radius:15px;background:rgba(7,17,34,.82);border-color:rgba(91,151,255,.19);box-shadow:0 16px 40px rgba(0,0,0,.12)}table{min-width:780px}th{padding:15px 16px;background:rgba(13,29,54,.78);font-size:9.5px;letter-spacing:.13em}td{padding:14px 16px;border-top-color:rgba(91,151,255,.11)}tr.r:hover td{background:rgba(42,116,226,.075)}
+.foot{padding:14px 4px 0;font-size:11px;letter-spacing:.01em}.center{background:linear-gradient(145deg,rgba(13,29,54,.97),rgba(6,15,30,.98));border-radius:20px;border-color:rgba(91,151,255,.24);box-shadow:0 24px 80px rgba(0,0,0,.3);padding:36px}.center h1{font-size:28px}.modal{border-radius:18px;box-shadow:0 28px 90px rgba(0,0,0,.45)}.drawer{background:linear-gradient(180deg,#0a172c,#060e1e);border-left-color:rgba(91,151,255,.24);box-shadow:-24px 0 70px rgba(0,0,0,.28)}#toast{border-radius:12px;box-shadow:0 12px 40px rgba(0,0,0,.3)}
+@media(min-width:1450px){.cards{grid-template-columns:repeat(4,minmax(150px,1fr))}.main{padding-left:48px;padding-right:48px}}
+@media(max-width:1100px){.shell{grid-template-columns:210px minmax(0,1fr)}.main{padding:22px 20px 40px}.hd{padding:20px}.tools input{width:190px}}
+@media(max-width:900px){.shell{grid-template-columns:1fr}.side{position:relative;height:auto;flex-direction:row;flex-wrap:wrap;align-items:center;padding:12px;gap:5px}.brand{width:100%;padding:5px 8px 13px;margin-bottom:5px}.side .sp{display:none}.nl{flex:1 1 auto;justify-content:center;font-size:12px}.me{margin:5px 0 0;flex:1}.main{padding:16px 12px 32px}.hd{padding:18px;gap:14px}.tools{width:100%}.tools input{flex:1;width:auto}.cards{gap:10px}.card{min-height:98px;padding:15px}.card b{font-size:25px}}
+@media(max-width:560px){.side .nl{flex:1 1 calc(50% - 8px);justify-content:flex-start}.hd h1{font-size:25px}.tools>*{flex:1}.tools input{flex-basis:100%}.cap{text-align:center}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.active{align-items:flex-start}.center{margin:36px 12px 0;padding:24px}.tw{margin-left:-2px;margin-right:-2px}}
+
 </style></head><body data-theme="blue">
-<p id="loading" class="mut" style="text-align:center;margin-top:90px">Chargement…</p>
-<div class="center hide" id="login"><h1>Espace staff</h1><p class="mut">Connectez-vous pour créer des codes d'accès et lire les rapports. Votre session reste active 24 heures avant de demander une nouvelle connexion.</p><p id="loginMsg" class="mut" role="status"></p>
+<p id="loading" class="mut" style="text-align:center;margin-top:90px">Loading…</p>
+<div class="center hide" id="login"><h1>Staff Area</h1><p class="mut">Sign in to create access codes and view reports. Your session remains active for 24 hours before you need to sign in again.</p><p id="loginMsg" class="mut" role="status"></p>
  <a class="btn dc" href="/auth/discord"><img src="/discord.svg" alt="">Continue with Discord</a>
  <p class="mut" style="text-align:center">New here? Same button — your Discord ID becomes your login.</p>
- <p class="note" style="text-align:center;margin-top:14px">En continuant, vous acceptez les <a href="/terms">conditions</a> et la <a href="/privacy">politique de confidentialité</a>.</p></div>
-<div class="center hide" id="activate"><h1>Activez votre clé</h1>
- <p class="mut">Connecté en tant que <b id="dn"></b>. La clé sera liée à ce compte Discord et ne pourra plus servir à un autre. Les jours commencent à l'activation.</p>
- <div class="newrow" style="margin-top:18px"><input id="key" placeholder="PCK-XXXX-XXXX-XXXX"><button class="btn" onclick="activate()">Activer la clé</button></div>
+ <p class="note" style="text-align:center;margin-top:14px">By continuing, you agree to the <a href="/terms">terms</a> and the <a href="/privacy">privacy policy</a>.</p></div>
+<div class="center hide" id="activate"><h1>Activate Your Key</h1>
+ <p class="mut">Signed in as <b id="dn"></b>. The key will be linked to this Discord account and cannot be used by another account. The days begin when activated.</p>
+ <div class="newrow" style="margin-top:18px"><input id="key" placeholder="PCK-XXXX-XXXX-XXXX"><button class="btn" onclick="activate()">Activate Key</button></div>
  <p id="actMsg" style="margin-top:10px;font-size:13px;color:var(--bad)"></p></div>
 
 <div id="app" class="shell hide">
  <aside class="side">
   <a class="brand" href="/"><img src="/logo.png" alt=""><span><b>Blue Detected</b><small>Anti-Cheat Dashboard</small></span></a>
-  <button class="theme" onclick="toggleTheme()"><span>●</span><span>Thème<small id="themeName">BLUE</small></span></button>
-  <a class="nl on" href="#" onclick="setF('all');return false">▦ Codes d'accès</a>
-  <a class="nl" href="#" onclick="setF('used');return false">☰ Résultats</a>
-  <a class="nl" href="#" onclick="openNew();return false">⚿ Générer un code</a>
-  <a class="nl" href="/download">⇩ Télécharger l'outil</a>
-  <a class="nl" href="/privacy">◉ Confidentialité</a>
-  <a class="nl" href="/terms">⚙ Conditions</a>
+<a class="nl on" href="#" onclick="setF('all');return false">▦ Access Codes</a>
+  <a class="nl" href="#" onclick="setF('used');return false">☰ Results</a>
+  <a class="nl" href="#" onclick="openNew();return false">⚿ Generate Access Code</a>
+  <a class="nl" href="/download">⇩ Download App</a>
+  <a class="nl" href="/privacy">◉ Privacy</a>
+  <a class="nl" href="/terms">⚙ Terms</a>
   <span class="sp"></span>
   <div class="me"><img id="av" alt=""><span><b id="nm"></b><small id="days"></small></span></div>
-  <button class="btn ghost sm" onclick="logout()">Déconnexion</button>
+  <button class="btn ghost sm" onclick="logout()">Sign Out</button>
  </aside>
  <main class="main">
-  <div class="hd"><div><div class="eyebrow">// Registre d'accès</div><h1>Codes d'accès</h1><p>Créez jusqu'à <span id="maxA">3</span> codes à la fois. Un code reste disponible jusqu'à ce que le joueur l'utilise ou qu'il expire (24 h).</p></div>
-   <div class="tools"><input id="q" placeholder="Rechercher…" oninput="q=this.value.toLowerCase();render()"><span class="cap" id="cap">0/3 dispo</span><button class="btn ghost sm" onclick="refresh(true)">⟳ Actualiser</button><button class="btn" onclick="openNew()">Générer un code</button></div></div>
-  <div class="cards"><div class="card" style="--c:var(--ok)"><span>Disponibles</span><b id="s-av">0</b></div><div class="card" style="--c:var(--warn)"><span>En scan</span><b id="s-sc">0</b></div><div class="card" style="--c:var(--acc)"><span>Utilisés</span><b id="s-us">0</b></div><div class="card" style="--c:var(--mut)"><span>Expirés</span><b id="s-ex">0</b></div></div>
+  <div class="hd"><div><div class="eyebrow">// ACCESS REGISTRY</div><h1>Access Codes</h1><p>Create up to <span id="maxA">3</span> codes at a time. A code remains available until the player uses it or it expires (24 hours).</p></div>
+   <div class="tools"><input id="q" placeholder="Search codes, players, or status…" oninput="q=this.value.toLowerCase();render()"><span class="cap" id="cap">0/3 available</span><button class="btn ghost sm" onclick="refresh(true)">⟳ Refresh</button><button class="btn" onclick="openNew()">Generate Access Code</button></div></div>
+  <div class="cards"><div class="card" style="--c:var(--ok)"><span>Available</span><b id="s-av">0</b></div><div class="card" style="--c:var(--warn)"><span>Scanning</span><b id="s-sc">0</b></div><div class="card" style="--c:var(--acc)"><span>Used</span><b id="s-us">0</b></div><div class="card" style="--c:var(--mut)"><span>Expired</span><b id="s-ex">0</b></div></div>
   <div id="dist"></div>
   <div class="chips" id="chips"></div>
   <div id="activeWrap"></div>
-  <div class="tw"><table><thead><tr><th>Code</th><th>Statut</th><th>Résultat</th><th>Jeu</th><th>Expire</th><th>Détection</th><th>Nom</th><th>Créé</th></tr></thead><tbody id="rows"><tr><td colspan="8"><div class="sk"></div></td></tr></tbody></table></div>
-  <p class="foot">1 code = 1 scan · valable 24 h · jusqu'à <span id="maxB">3</span> codes disponibles · Les rapports sont supprimés après <span id="ret">30</span> jours.</p>
+  <div class="tw"><table><thead><tr><th>Code</th><th>Status</th><th>Result</th><th>Jeu</th><th>Expires</th><th>Detection</th><th>Name</th><th>Created</th></tr></thead><tbody id="rows"><tr><td colspan="8"><div class="sk"></div></td></tr></tbody></table></div>
+  <p class="foot">1 code = 1 scan · valid for 24 hours · up to <span id="maxB">3</span> available codes · Reports are deleted after <span id="ret">30</span> days.</p>
  </main>
 </div>
 <div id="shade" class="shade hide" onclick="closeD();closeNew()"></div>
-<div id="modal" class="modal hide"><h3>Générer un code</h3><p class="mut" style="font-size:13px">Nom du joueur (facultatif) pour le retrouver dans la liste.</p><div class="newrow"><input id="pl" placeholder="Nom du joueur" onkeydown="if(event.key==='Enter')newCheck()"><button class="btn" onclick="newCheck()">Créer</button></div></div>
+<div id="modal" class="modal hide"><h3>Generate Access Code</h3><p class="mut" style="font-size:13px">Player name (optional) to help find them in the list.</p><div class="newrow"><input id="pl" placeholder="Player name" onkeydown="if(event.key==='Enter')newCheck()"><button class="btn" onclick="newCheck()">Create</button></div></div>
 <aside id="drawer" class="drawer hide"></aside><div id="toast" class="hide"></div>
 <script>
 const $=id=>document.getElementById(id);let ALL=[],flt='all',q='',lastCode='',timer=null,openCode=null,MAXA=3,sessionSeen=false;
 const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 const api=(p,o={})=>fetch(p,{...o,headers:{'Content-Type':'application/json'}}).then(async r=>({http:r.status,...(await r.json().catch(()=>({})))}));
 const link=()=>location.origin+'/download',tone=n=>n>=85?'ok':n>=60?'warn':'bad';
-function theme(t){document.body.dataset.theme=t;$('themeName')&&($('themeName').textContent=t.toUpperCase());try{localStorage.setItem('bd-theme',t)}catch(e){}}
-function toggleTheme(){theme(document.body.dataset.theme==='crimson'?'blue':'crimson')}
-try{const t=localStorage.getItem('bd-theme');if(t==='blue'||t==='crimson')document.body.dataset.theme=t}catch(e){}
-function show(id){$('loading').classList.add('hide');['login','activate','app'].forEach(x=>$(x).classList.toggle('hide',x!==id));$('themeName')&&($('themeName').textContent=document.body.dataset.theme.toUpperCase())}
+document.body.dataset.theme='blue';
+function show(id){$('loading').classList.add('hide');['login','activate','app'].forEach(x=>$(x).classList.toggle('hide',x!==id))}
 function requireLogin(message=''){clearInterval(timer);timer=null;$('loginMsg').textContent=message;show('login')}
 function toast(m){const t=$('toast');t.textContent=m;t.classList.remove('hide');clearTimeout(t._h);t._h=setTimeout(()=>t.classList.add('hide'),1800)}
 async function copy(t,m){try{await navigator.clipboard.writeText(t)}catch(e){const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();document.execCommand('copy');a.remove()}toast(m)}
-const copyCode=c=>copy(c,'Code copié');
-const copyMsg=c=>copy(`Télécharge l'application de vérification ici : ${link()}\nPuis entre ce code : ${c}`,'Lien et code copiés');
-async function boot(){const m=await api('/owner/me');if(m.http===401){requireLogin(sessionSeen?'Votre session de 24 heures a expiré. Reconnectez-vous avec Discord pour continuer.':'');return}
+const copyCode=c=>copy(c,'Code copied');
+const copyMsg=c=>copy(`Download the PC check application here: ${link()}\nThen enter this code: ${c}`,'Download link and code copied');
+async function boot(){const m=await api('/owner/me');if(m.http===401){requireLogin(sessionSeen?'Your 24-hour session has expired. Sign in with Discord to continue.':'');return}
  sessionSeen=true;$('loginMsg').textContent='';
  $('nm').textContent=m.user.name;
  $('av').src=m.user.avatar?`https://cdn.discordapp.com/avatars/${m.user.id}/${m.user.avatar}.png?size=64`:'https://cdn.discordapp.com/embed/avatars/0.png';
- if(m.status!=='ok'){$('dn').textContent=m.user.name;$('actMsg').textContent=m.status==='expired'?'Votre clé a expiré. Entrez une nouvelle clé.':m.status==='revoked'?'Votre clé a été désactivée.':'';show('activate');return}
+ if(m.status!=='ok'){$('dn').textContent=m.user.name;$('actMsg').textContent=m.status==='expired'?'Your key has expired. Enter a new key.':m.status==='revoked'?'Your key has been disabled.':'';show('activate');return}
  show('app');refresh();clearInterval(timer);timer=setInterval(refresh,5000)}
 async function logout(){await api('/auth/logout',{method:'POST'});location.href='/'}
-async function activate(){$('actMsg').textContent='';const j=await api('/owner/activate',{method:'POST',body:JSON.stringify({key:$('key').value})});j.ok?boot():$('actMsg').textContent=j.error||'Erreur'}
+async function activate(){$('actMsg').textContent='';const j=await api('/owner/activate',{method:'POST',body:JSON.stringify({key:$('key').value})});j.ok?boot():$('actMsg').textContent=j.error||'Error'}
 function openNew(){$('modal').classList.remove('hide');$('shade').classList.remove('hide');setTimeout(()=>$('pl').focus(),30)}
 function closeNew(){$('modal').classList.add('hide');if($('drawer').classList.contains('hide'))$('shade').classList.add('hide')}
 async function newCheck(){const j=await api('/owner/check/new',{method:'POST',body:JSON.stringify({player:$('pl').value})});
- if(!j.code){if(j.http===401||j.http===403)return boot();toast(typeof j.error==='string'?j.error:'Erreur');return}
- lastCode=j.code;$('pl').value='';closeNew();toast('Code créé');refresh(true)}
+ if(!j.code){if(j.http===401||j.http===403)return boot();toast(typeof j.error==='string'?j.error:'Error');return}
+ lastCode=j.code;$('pl').value='';closeNew();toast('Code created');refresh(true)}
 const st=c=>c.done?'used':c.expired?'expired':c.scanning?'scanning':'available';
-const SL={available:['ok','Disponible'],scanning:['warn','En scan'],used:['bad','Utilisé'],expired:['off','Expiré']};
+const SL={available:['ok','Available'],scanning:['warn','Scanning'],used:['bad','Used'],expired:['off','Expired']};
 const statsOf=c=>c.stats&&typeof c.stats==='object'&&!Array.isArray(c.stats)?c.stats:{};
 function setF(k){flt=k;render()}
 function digits(code,sm){return `<span class="digits${sm?' sm':''}">${String(code).split('').map(d=>`<span class="d">${esc(d)}</span>`).join('')}</span>`}
 function left(ms){if(ms<=0)return '—';const h=Math.floor(ms/3600000),m=Math.floor(ms%3600000/60000);return h+'h '+String(m).padStart(2,'0')+'m'}
 function ago(t){const m=Math.floor((Date.now()-t)/60000);if(m<1)return "à l'instant";if(m<60)return 'il y a '+m+' min';const h=Math.floor(m/60);if(h<24)return 'il y a '+h+' h';return 'il y a '+Math.floor(h/24)+' j'}
-function det(c){if(!c.done)return '<span class="pill wait"><i class="dot"></i>En attente</span>';const stats=statsOf(c);return stats.high?'<span class="pill bad"><i class="dot"></i>Risque élevé</span>':stats.medium?'<span class="pill warn"><i class="dot"></i>À vérifier</span>':'<span class="pill ok"><i class="dot"></i>Propre</span>'}
+function det(c){if(!c.done)return '<span class="pill wait"><i class="dot"></i>Pending</span>';const stats=statsOf(c);return stats.high?'<span class="pill bad"><i class="dot"></i>Risque élevé</span>':stats.medium?'<span class="pill warn"><i class="dot"></i>À vérifier</span>':'<span class="pill ok"><i class="dot"></i>Clean</span>'}
 function render(){const n={available:0,scanning:0,used:0,expired:0};ALL.forEach(c=>n[st(c)]++);
  $('s-av').textContent=n.available;$('s-sc').textContent=n.scanning;$('s-us').textContent=n.used;$('s-ex').textContent=n.expired;
  const act=n.available+n.scanning;$('cap').textContent=(MAXA?act+'/'+MAXA:act)+' actifs';
- const L=[['all','Tous',ALL.length],['available','Disponibles',n.available],['scanning','En scan',n.scanning],['used','Utilisés',n.used],['expired','Expirés',n.expired]];
+ const L=[['all','All',ALL.length],['available','Available',n.available],['scanning','Scanning',n.scanning],['used','Used',n.used],['expired','Expired',n.expired]];
  $('chips').innerHTML=L.map(([k,t,v])=>`<button class="chip ${flt===k?'on':''}" onclick="setF('${k}')">${t}<em>${v}</em></button>`).join('');
  const dn={ok:0,warn:0,bad:0};ALL.filter(c=>c.done).forEach(c=>{const stats=statsOf(c);dn[stats.high?'bad':stats.medium?'warn':'ok']++});const dt=dn.ok+dn.warn+dn.bad;
  $('dist').innerHTML=dt?`<div class="dist"><i style="width:${dn.ok/dt*100}%;background:var(--ok)"></i><i style="width:${dn.warn/dt*100}%;background:var(--warn)"></i><i style="width:${dn.bad/dt*100}%;background:var(--bad)"></i></div><div class="distl"><span><b>${dn.ok}</b> propres</span><span><b>${dn.warn}</b> à vérifier</span><span><b>${dn.bad}</b> risque élevé</span></div>`:'';
  const cur=ALL.filter(c=>st(c)==='available').sort((a,b)=>b.createdAt-a.createdAt)[0];
- $('activeWrap').innerHTML=cur?`<div class="sec">Code actif</div><div class="active"><div><div class="lbl">DISPONIBLE</div>${digits(cur.code)}</div><div class="act"><button class="btn ghost sm" onclick="copyCode('${esc(cur.code)}')">Copier le code</button><button class="btn sm" onclick="copyMsg('${esc(cur.code)}')">Copier lien + code</button><span class="exp">Expire dans ${left((cur.expiresAt||cur.createdAt+864e5)-Date.now())}</span></div></div>`:'';
+ $('activeWrap').innerHTML=cur?`<div class="sec">Active Code</div><div class="active"><div><div class="lbl">DISPONIBLE</div>${digits(cur.code)}</div><div class="act"><button class="btn ghost sm" onclick="copyCode('${esc(cur.code)}')">Copy Code</button><button class="btn sm" onclick="copyMsg('${esc(cur.code)}')">Copy Link + Code</button><span class="exp">Expires in ${left((cur.expiresAt||cur.createdAt+864e5)-Date.now())}</span></div></div>`:'';
  const list=ALL.filter(c=>(flt==='all'||st(c)===flt)&&(!q||(c.player||'').toLowerCase().includes(q)||c.code.includes(q)));
  $('rows').innerHTML=list.map(c=>{const s=st(c),[tn,tl]=SL[s],ex=(s==='available'||s==='scanning')?left((c.expiresAt||c.createdAt+864e5)-Date.now()):'—';
-  return `<tr class="r ${c.done?'go':''}" ${c.done?`onclick="openCheck('${esc(c.code)}')"`:''}><td>${digits(c.code,1)}</td><td><span class="pill ${tn}"><i class="dot"></i>${tl}</span></td><td>${c.done?'<span class="pill off">Ouvrir ↗</span>':'<span class="mut">—</span>'}</td><td class="game">FiveM</td><td>${ex}</td><td>${det(c)}</td><td>${c.player?esc(c.player):'<span class="mut"><i>Sans nom</i></span>'}</td><td class="rel">${ago(c.createdAt)}</td></tr>`}).join('')
-  ||`<tr><td colspan="8" class="empty">${ALL.length?'Aucun résultat pour ce filtre.':'Aucun code pour le moment. Cliquez sur « Générer un code ».'}</td></tr>`}
+  return `<tr class="r ${c.done?'go':''}" ${c.done?`onclick="openCheck('${esc(c.code)}')"`:''}><td>${digits(c.code,1)}</td><td><span class="pill ${tn}"><i class="dot"></i>${tl}</span></td><td>${c.done?'<span class="pill off">Open ↗</span>':'<span class="mut">—</span>'}</td><td class="game">FiveM</td><td>${ex}</td><td>${det(c)}</td><td>${c.player?esc(c.player):'<span class="mut"><i>Unnamed</i></span>'}</td><td class="rel">${ago(c.createdAt)}</td></tr>`}).join('')
+  ||`<tr><td colspan="8" class="empty">${ALL.length?'No results match this filter.':'No codes yet. Click “Generate Code”.'}</td></tr>`}
 async function refresh(force){const j=await api('/owner/checks');if(j.http===401||j.http===403){boot();return}
- if(j.http!==200||!Array.isArray(j.checks)){toast('Impossible de charger les rapports. Réessayez.');return}
- const fresh=j.checks.filter(c=>c.done&&PREV[c.code]===false);j.checks.forEach(c=>PREV[c.code]=c.done);if(fresh.length){toast('Rapport reçu : '+(fresh[0].player||fresh[0].code));document.title='● Rapport reçu — Blue Detected'}
+ if(j.http!==200||!Array.isArray(j.checks)){toast('Unable to load reports. Please try again.');return}
+ const fresh=j.checks.filter(c=>c.done&&PREV[c.code]===false);j.checks.forEach(c=>PREV[c.code]=c.done);if(fresh.length){toast('Report received: '+(fresh[0].player||fresh[0].code));document.title='● Report reçu — Blue Detected'}
  ALL=j.checks;MAXA=j.maxActive||0;$('maxA').textContent=$('maxB').textContent=MAXA||'∞';
  const d=Math.max(0,Math.ceil((j.expiresAt-Date.now())/864e5));$('days').textContent=d+' jour'+(d>1?'s':'')+' restant'+(d>1?'s':'');
  $('ret').textContent=j.retentionDays;render()}
 function donut(v,size){const r=size*.42,C=2*Math.PI*r,col=`var(--${tone(v)=='ok'?'ok':tone(v)=='warn'?'warn':'bad'})`;
  return `<div class="donut" style="width:${size}px;height:${size}px"><svg width="${size}" height="${size}"><circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="${size*.1}"/><circle class="arc" data-t="${(C*(1-v/100)).toFixed(1)}" cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="${col}" stroke-width="${size*.1}" stroke-linecap="round" stroke-dasharray="${C.toFixed(1)}" stroke-dashoffset="${C.toFixed(1)}"/></svg><div class="v" style="font-size:${size*.25}px">${v} %<small>clean</small></div></div>`}
 function closeD(){$('drawer').classList.add('hide');$('shade').classList.add('hide');openCode=null}
-const PREV={};let CUR=null,sevF='all',txtQ='';
-async function openCheck(code){openCode=code;sevF='all';txtQ='';$('drawer').classList.remove('hide');$('shade').classList.remove('hide');
+const PREV={};let CUR=null,sevF='all',artifactF='all',txtQ='';
+async function openCheck(code){openCode=code;sevF='all';artifactF='all';txtQ='';$('drawer').classList.remove('hide');$('shade').classList.remove('hide');
  $('drawer').innerHTML='<div class="sk" style="height:34px;width:60%"></div><div class="sk" style="height:120px"></div><div class="sk"></div><div class="sk"></div>';
  const j=await api('/owner/check/'+code);CUR={code,j};drawerView()}
 const fxr=value=>{const f=value&&typeof value==='object'?value:{},s=['high','medium','info'].includes(f.severity)?f.severity:'info';const type=String(f.fileType||'OTHER').toUpperCase();return `<div class="f ${s}"><span class="pill ${s==='high'?'bad':s==='medium'?'warn':'wait'}">${esc(type)}</span> ${esc(f.reason||f.category)}<details><summary>Détail technique</summary><code>${esc(f.detail)}</code><button class="btn ghost sm cp" onclick="copy(this.previousElementSibling.textContent,'Détail copié')">Copier</button></details></div>`};
-function verdictOf(r){const st=r.stats&&typeof r.stats==='object'&&!Array.isArray(r.stats)?r.stats:{},ch=Array.isArray(r.cheats)?r.cheats:[];return {st,ch,vk:ch.length||st.high?'bad':st.medium?'warn':'ok',vt:ch.length?'Cheat détecté : '+ch.join(', '):st.high?'Éléments très suspects':st.medium?'Aucun cheat connu, éléments à vérifier':'Aucun cheat connu détecté'}}
+function verdictOf(r){const st=r.stats&&typeof r.stats==='object'&&!Array.isArray(r.stats)?r.stats:{},ch=Array.isArray(r.cheats)?r.cheats:[];return {st,ch,vk:ch.length||st.high?'bad':st.medium?'warn':'ok',vt:ch.length?'Cheat detected: '+ch.join(', '):st.high?'Highly suspicious items':st.medium?'No known cheats; items need review':'No known cheats detected'}}
 function summaryText(){const {code,j}=CUR,r=j.report;if(!r)return '';const v=verdictOf(r),F=Array.isArray(r.findings)?r.findings:[];
  const top=F.filter(f=>f&&f.severity==='high').slice(0,8).map(f=>'• '+(f.reason||f.category)+' ('+f.detail+')').join('\n');
- return `Joueur : ${j.player||'Sans nom'} (code ${code})\nPC : ${r.hostname||'—'} · ${r.os||''}\nVerdict : ${v.vt}\nIndice clean : ${typeof v.st.clean==='number'?v.st.clean+' %':'—'}\nCritiques : ${v.st.high||0} · À vérifier : ${v.st.medium||0}`+(top?'\n\n'+top:'')}
+ return `Player: ${j.player||'Unnamed'} (code ${code})\nPC : ${r.hostname||'—'} · ${r.os||''}\nVerdict: ${v.vt}\nClean Score: ${typeof v.st.clean==='number'?v.st.clean+' %':'—'}\nCritical: ${v.st.high||0} · Needs Review: ${v.st.medium||0}`+(top?'\n\n'+top:'')}
 function drawerView(){const {code,j}=CUR;
- const head=`<div class="dh"><div><h2>${esc(j.player)||'Sans nom'}</h2><p class="mut" style="font-size:13px">Code ${esc(code)}</p></div><div class="newrow">${j.report?`<button class="btn ghost sm" onclick="copy(summaryText(),'Résumé copié')">Copier le résumé</button>`:''}<button class="btn ghost sm" onclick="del('${esc(code)}')">Supprimer</button><button class="btn ghost sm" onclick="closeD()" aria-label="Fermer">✕</button></div></div>`;
- if(!j.report){$('drawer').innerHTML=head+'<p class="mut" style="margin-top:24px">En attente du joueur. Le rapport apparaîtra ici dès que la vérification sera terminée.</p>';return}
+ const head=`<div class="dh"><div><h2>${esc(j.player)||'Unnamed'}</h2><p class="mut" style="font-size:13px">Code ${esc(code)}</p></div><div class="newrow">${j.report?`<button class="btn ghost sm" onclick="copy(summaryText(),'Summary copied')">Copy Summary</button>`:''}<button class="btn ghost sm" onclick="del('${esc(code)}')">Delete</button><button class="btn ghost sm" onclick="closeD()" aria-label="Close">✕</button></div></div>`;
+ if(!j.report){$('drawer').innerHTML=head+'<p class="mut" style="margin-top:24px">Waiting for the player. The report will appear here when the check is complete.</p>';return}
  const r=j.report,{st,ch,vk,vt}=verdictOf(r),cl=Array.isArray(r.cleaners)?r.cleaners:[],has=typeof st.clean==='number';
- const vs=cl.length?'Programme de nettoyage détecté : '+cl.join(', '):'Aucun programme de nettoyage détecté';
- const meta=`<dl class="meta"><dt>PC</dt><dd>${esc(r.hostname)}</dd><dt>Système</dt><dd>${esc(r.os||'—')}</dd><dt>Analyse</dt><dd>${esc(new Date(r.scannedAt).toLocaleString())}</dd><dt>Fichiers</dt><dd>${esc(st.files??'—')} analysés · ${esc(st.processes??'—')} processus</dd><dt>HWID</dt><dd>${esc(r.hwid)} <button class="btn ghost sm" style="padding:2px 8px" data-copy-value="${esc(r.hwid)}" onclick="copy(this.dataset.copyValue,'HWID copié')">Copier</button></dd></dl>`;
+ const vs=cl.length?'Cleanup tool detected: '+cl.join(', '):'No cleanup tool detected';
+ const meta=`<dl class="meta"><dt>PC</dt><dd>${esc(r.hostname)}</dd><dt>System</dt><dd>${esc(r.os||'—')}</dd><dt>Scan</dt><dd>${esc(new Date(r.scannedAt).toLocaleString())}</dd><dt>Files</dt><dd>${esc(st.files??'—')} analysés · ${esc(st.processes??'—')} processus</dd><dt>HWID</dt><dd>${esc(r.hwid)} <button class="btn ghost sm" style="padding:2px 8px" data-copy-value="${esc(r.hwid)}" onclick="copy(this.dataset.copyValue,'HWID copié')">Copier</button></dd></dl>`;
  const F=Array.isArray(r.findings)?r.findings:[],n={high:0,medium:0,info:0};F.forEach(f=>{const s=f&&['high','medium','info'].includes(f.severity)?f.severity:'info';n[s]++});
- const SF=[['all','Tout',F.length],['high','Critique',n.high],['medium','À vérifier',n.medium],['info','Info',n.info]];
+ const exeCount=F.filter(isExeFinding).length,fivemCount=F.filter(isFiveMFinding).length;
+ const AF=[['all','All',F.length],['exe','EXE',exeCount],['fivem','FiveM',fivemCount]],SF=[['all','All Levels',F.length],['high','Critical',n.high],['medium','À vérifier',n.medium],['info','Info',n.info]];
  $('drawer').innerHTML=head+`<div class="verdict ${vk}">${has?donut(st.clean,96):''}<div><b>${esc(vt)}</b><span>${esc(vs)}</span></div></div>`+(has?'<p class="note">L\'indice clean est indicatif : ce n\'est pas une preuve. La décision finale appartient au staff.</p>':'')+meta+
-  `<div class="fbar">${SF.map(([k,t,v])=>`<button class="chip ${sevF===k?'on':''}" onclick="sevF='${k}';drawerView()">${t}<em>${v}</em></button>`).join('')}<input id="fq" placeholder="Filtrer…" value="${esc(txtQ)}" oninput="txtQ=this.value.toLowerCase();renderF()"></div><div id="fl"></div>`;
+  `<div class="fbar">${AF.map(([k,t,v])=>`<button class="chip ${artifactF===k?'on':''}" onclick="artifactF='${k}';drawerView()">${t}<em>${v}</em></button>`).join('')}<span style="width:1px;height:24px;background:var(--line);margin:0 3px"></span>${SF.map(([k,t,v])=>`<button class="chip ${sevF===k?'on':''}" onclick="sevF='${k}';drawerView()">${t}<em>${v}</em></button>`).join('')}<input id="fq" placeholder="Filtrer…" value="${esc(txtQ)}" oninput="txtQ=this.value.toLowerCase();renderF()"></div><div id="fl"></div>`;
  renderF();setTimeout(()=>document.querySelectorAll('#drawer .arc').forEach(a=>a.style.strokeDashoffset=a.dataset.t),80)}
-function renderF(){const r=CUR.j.report,F=(Array.isArray(r.findings)?r.findings:[]).filter(value=>{const f=value&&typeof value==='object'?value:{},s=['high','medium','info'].includes(f.severity)?f.severity:'info';return (sevF==='all'||s===sevF)&&(!txtQ||(String(f.reason||'')+' '+String(f.detail||'')+' '+String(f.category||'')).toLowerCase().includes(txtQ))});
+function findingText(value){const f=value&&typeof value==='object'?value:{};return [f.fileType,f.fileName,f.path,f.reason,f.detail,f.category,f.source].filter(Boolean).join(' ').toLowerCase()}
+function isExeFinding(value){const f=value&&typeof value==='object'?value:{},t=String(f.fileType||'').toUpperCase();return t==='EXE'||/\.(exe)(?:\b|$)|\bexe file\b|executable/i.test(findingText(value))}
+function isFiveMFinding(value){const f=value&&typeof value==='object'?value:{},t=findingText(value);return /fivem|five m|gta\s*v|\.rpf\b|\bmods?\b|\.asi\b|citizenfx|citizen\.fx|\.ytd\b|\.ydr\b|\.yft\b|\.ymap\b|\.meta\b|\.lua\b/.test(t)}
+function renderF(){const r=CUR.j.report,F=(Array.isArray(r.findings)?r.findings:[]).filter(value=>{const f=value&&typeof value==='object'?value:{},s=['high','medium','info'].includes(f.severity)?f.severity:'info',typeOk=artifactF==='all'||(artifactF==='exe'?isExeFinding(value):isFiveMFinding(value));return typeOk&&(sevF==='all'||s===sevF)&&(!txtQ||findingText(value).includes(txtQ))});
  const G={};F.forEach(value=>{const f=value&&typeof value==='object'?value:{},category=String(f.category||'Information');(G[category]=G[category]||[]).push(f)});
- const order=['Cheat connu','Matériel suspect','Outil suspect','Module injecté (FiveM)','Dossier suspect','Traces effacées ou masquées','Programme de nettoyage','Fichiers modifiés (FiveM)','Information'];
+ const order=['Cheat connu','Suspicious Hardware','Suspicious Tool','Module injecté (FiveM)','Suspicious Folder','Cleared or Hidden Traces','Programme de nettoyage','Files modifiés (FiveM)','Information'];
  const cats=order.filter(c=>G[c]).concat(Object.keys(G).filter(c=>!order.includes(c)));
- $('fl').innerHTML=cats.length?cats.map(c=>`<details class="cat" open><summary class="gh">${esc(c)}<span>${G[c].length}</span></summary>${G[c].map(fxr).join('')}</details>`).join(''):'<p class="mut" style="margin-top:20px">'+((Array.isArray(r.findings)?r.findings:[]).length?'Aucun élément pour ce filtre.':'Rien à signaler.')+'</p>'}
-async function del(code){if(!confirm('Supprimer définitivement ce rapport ?'))return;await api('/owner/check/delete',{method:'POST',body:JSON.stringify({code})});closeD();refresh()}
+ $('fl').innerHTML=cats.length?cats.map(c=>`<details class="cat" open><summary class="gh">${esc(c)}<span>${G[c].length}</span></summary>${G[c].map(fxr).join('')}</details>`).join(''):'<p class="mut" style="margin-top:20px">'+((Array.isArray(r.findings)?r.findings:[]).length?'No items match this filter.':'Nothing to report.')+'</p>'}
+async function del(code){if(!confirm('Delete définitivement ce rapport ?'))return;await api('/owner/check/delete',{method:'POST',body:JSON.stringify({code})});closeD();refresh()}
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeD();closeNew()}else if(e.key==='/'&&!/INPUT|TEXTAREA/.test(document.activeElement.tagName)&&$('q')){e.preventDefault();$('q').focus()}});
 window.addEventListener('focus',()=>{document.title='Dashboard — Blue Detected'});
 boot();

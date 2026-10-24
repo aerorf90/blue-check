@@ -467,9 +467,17 @@ async function start() {
     purge().catch((error) => console.error('Report retention cleanup failed:', error.message));
   }, 6 * 3600000);
   purgeTimer.unref();
-  const host = process.env.HOST || '0.0.0.0';
-  const port = Number(process.env.PORT || 3000);
-  const server = configureHttpServer(app.listen(port, host, () => console.log(`Blue Detected website listening on ${host}:${port}.`)));
+  // Render web services must bind to all network interfaces, not 127.0.0.1.
+  const host = '0.0.0.0';
+  const port = Number(process.env.PORT || 10000);
+  if (!Number.isInteger(port) || port < 1 || port > 65535) {
+    throw new Error('PORT must be a valid TCP port.');
+  }
+  const server = configureHttpServer(
+    app.listen(port, host, () => {
+      console.log(`Blue Detected website listening on ${host}:${port}.`);
+    })
+  );
   server.on('close', async () => {
     clearInterval(purgeTimer);
     await pgPool?.end();
